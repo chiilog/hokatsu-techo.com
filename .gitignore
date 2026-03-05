@@ -49,3 +49,5 @@ coverage
 # Misc
 prototype
 .aidlc-rule-details
+*storybook.log
+storybook-static
