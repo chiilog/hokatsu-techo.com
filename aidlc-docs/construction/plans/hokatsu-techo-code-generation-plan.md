@@ -22,14 +22,14 @@ US-01〜US-13（全13ストーリー）
 - [ ] PWA設定（`next.config.ts` にPWAプラグイン追加、`public/manifest.json`）
 
 ### Step 2: 共通レイアウト・グローバルスタイル
-- [ ] `app/layout.tsx` — ルートレイアウト（メタデータ、フォント、グローバルCSS）
-- [ ] `app/globals.css` — Tailwind ディレクティブ + カスタムスタイル
-- [ ] `components/layout/Header.tsx` — ヘッダー（タイトル + ヘルプ[?]アイコン）
-- [ ] **ストーリーカバレッジ**: US-13（ヘルプアイコン配置）
+- [x] `app/layout.tsx` — ルートレイアウト（メタデータ、フォント、グローバルCSS）
+- [x] `app/globals.css` — Tailwind ディレクティブ + カスタムスタイル
+- [x] `components/layout/Header.tsx` — ヘッダー（タイトル + ヘルプ[?]アイコン）
+- [x] **ストーリーカバレッジ**: US-13（ヘルプアイコン配置）
 
 ### Step 3: shadcn/ui コンポーネント導入
-- [ ] Button, Dialog, AlertDialog, Input, Textarea, Label, Card コンポーネント
-- [ ] `lib/utils.ts`（shadcn/ui ユーティリティ）
+- [x] Button, Dialog, AlertDialog, Input, Textarea, Label, Card コンポーネント
+- [x] `lib/utils.ts`（shadcn/ui ユーティリティ）
 
 ### Step 4: データモデル・Zustand Store
 - [ ] `types/nursery.ts` — Nursery, AppState 型定義
