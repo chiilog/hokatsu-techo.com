@@ -38,12 +38,12 @@ US-01〜US-13（全13ストーリー）
 - [x] **ストーリーカバレッジ**: 全ストーリーの基盤
 
 ### Step 5: データモデル・Store のテスト
-- [x] `stores/__tests__/nurseryStore.test.ts` — store操作のテスト（追加、更新、削除、フラグ管理）
-- [x] `services/__tests__/storageService.test.ts` — マイグレーション・永続化のテスト
+- [x] `stores/nurseryStore.test.ts` — store操作のテスト（追加、更新、削除、フラグ管理）
+- [x] `services/storageService.test.ts` — マイグレーション・永続化のテスト
 
 ### Step 6: オンボーディング
 - [ ] `components/onboarding/OnboardingDialog.tsx` — 初回オンボーディング画面
-- [ ] `components/onboarding/__tests__/OnboardingDialog.test.tsx` — テスト
+- [ ] `components/onboarding/OnboardingDialog.test.tsx` — テスト
 - [ ] **ストーリーカバレッジ**: US-03（アプリの使い方を知る）、US-13（アプリ説明の再確認）
 
 ### Step 7: 園一覧ページ（ホーム）
@@ -54,9 +54,9 @@ US-01〜US-13（全13ストーリー）
 - [ ] **ストーリーカバレッジ**: US-10（園一覧を見返す）、US-11（メモプレビュー）、US-03, US-13
 
 ### Step 8: 園一覧ページのテスト
-- [ ] `components/nursery/__tests__/NurseryCard.test.tsx`
-- [ ] `components/nursery/__tests__/NurseryList.test.tsx`
-- [ ] `app/__tests__/page.test.tsx` — 園一覧ページのテスト
+- [ ] `components/nursery/NurseryCard.test.tsx`
+- [ ] `components/nursery/NurseryList.test.tsx`
+- [ ] `app/page.test.tsx` — 園一覧ページのテスト
 
 ### Step 9: 園追加ページ
 - [ ] `components/nursery/NurseryForm.tsx` — 園追加フォーム（園名 + 見学日 + バリデーション）
@@ -64,8 +64,8 @@ US-01〜US-13（全13ストーリー）
 - [ ] **ストーリーカバレッジ**: US-01（園を追加する）、US-02（見学日を設定する）
 
 ### Step 10: 園追加ページのテスト
-- [ ] `components/nursery/__tests__/NurseryForm.test.tsx`
-- [ ] `app/add/__tests__/page.test.tsx`
+- [ ] `components/nursery/NurseryForm.test.tsx`
+- [ ] `app/add/page.test.tsx`
 
 ### Step 11: 園詳細ページ
 - [ ] `components/nursery/NurseryDetail.tsx` — インライン編集UI（園名、見学日、メモ）
@@ -75,16 +75,16 @@ US-01〜US-13（全13ストーリー）
 - [ ] **ストーリーカバレッジ**: US-04, US-05, US-06, US-07, US-08, US-09, US-11, US-12
 
 ### Step 12: 園詳細ページのテスト
-- [ ] `components/nursery/__tests__/NurseryDetail.test.tsx`
-- [ ] `components/nursery/__tests__/DeleteNurseryDialog.test.tsx`
-- [ ] `components/nursery/__tests__/VisitTipsDialog.test.tsx`
-- [ ] `app/nursery/[id]/__tests__/page.test.tsx`
+- [ ] `components/nursery/NurseryDetail.test.tsx`
+- [ ] `components/nursery/DeleteNurseryDialog.test.tsx`
+- [ ] `components/nursery/VisitTipsDialog.test.tsx`
+- [ ] `app/nursery/[id]/page.test.tsx`
 
 ### Step 13: アナリティクス・Cookie同意
 - [ ] `services/analyticsService.ts` — GA4 + Clarity 初期化・イベント送信
 - [ ] `hooks/useCookieConsent.ts` — Cookie同意管理フック
 - [ ] `components/common/CookieConsent.tsx` — Cookie同意バナー
-- [ ] `components/common/__tests__/CookieConsent.test.tsx`
+- [ ] `components/common/CookieConsent.test.tsx`
 - [ ] **ストーリーカバレッジ**: NFR-04（アナリティクス）
 
 ### Step 14: セキュリティヘッダー・エラーハンドリング
@@ -131,56 +131,48 @@ hokatsu-techo.com/
   app/
     layout.tsx
     page.tsx
+    page.test.tsx
     globals.css
     not-found.tsx
     error.tsx
     add/
       page.tsx
+      page.test.tsx
     nursery/
       [id]/
         page.tsx
-    __tests__/
-      page.test.tsx
-    add/__tests__/
-      page.test.tsx
-    nursery/[id]/__tests__/
-      page.test.tsx
+        page.test.tsx
   components/
     layout/
       Header.tsx
       EmptyState.tsx
     nursery/
       NurseryCard.tsx
+      NurseryCard.test.tsx
       NurseryList.tsx
+      NurseryList.test.tsx
       NurseryForm.tsx
+      NurseryForm.test.tsx
       NurseryDetail.tsx
+      NurseryDetail.test.tsx
       DeleteNurseryDialog.tsx
+      DeleteNurseryDialog.test.tsx
       VisitTipsDialog.tsx
-      __tests__/
-        NurseryCard.test.tsx
-        NurseryList.test.tsx
-        NurseryForm.test.tsx
-        NurseryDetail.test.tsx
-        DeleteNurseryDialog.test.tsx
-        VisitTipsDialog.test.tsx
+      VisitTipsDialog.test.tsx
     onboarding/
       OnboardingDialog.tsx
-      __tests__/
-        OnboardingDialog.test.tsx
+      OnboardingDialog.test.tsx
     common/
       CookieConsent.tsx
-      __tests__/
-        CookieConsent.test.tsx
+      CookieConsent.test.tsx
     ui/          (shadcn/ui自動生成)
   stores/
     nurseryStore.ts
-    __tests__/
-      nurseryStore.test.ts
+    nurseryStore.test.ts
   services/
     storageService.ts
+    storageService.test.ts
     analyticsService.ts
-    __tests__/
-      storageService.test.ts
   hooks/
     useCookieConsent.ts
   types/
