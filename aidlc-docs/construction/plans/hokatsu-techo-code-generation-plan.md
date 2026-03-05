@@ -32,14 +32,14 @@ US-01〜US-13（全13ストーリー）
 - [x] `lib/utils.ts`（shadcn/ui ユーティリティ）
 
 ### Step 4: データモデル・Zustand Store
-- [ ] `types/nursery.ts` — Nursery, AppState 型定義
-- [ ] `stores/nurseryStore.ts` — Zustand store（CRUD + persist middleware）
-- [ ] `services/storageService.ts` — スキーママイグレーション + カスタムストレージ
-- [ ] **ストーリーカバレッジ**: 全ストーリーの基盤
+- [x] `types/nursery.ts` — Nursery, AppState 型定義
+- [x] `stores/nurseryStore.ts` — Zustand store（CRUD + persist middleware）
+- [x] `services/storageService.ts` — スキーママイグレーション + カスタムストレージ
+- [x] **ストーリーカバレッジ**: 全ストーリーの基盤
 
 ### Step 5: データモデル・Store のテスト
-- [ ] `stores/__tests__/nurseryStore.test.ts` — store操作のテスト（追加、更新、削除、フラグ管理）
-- [ ] `services/__tests__/storageService.test.ts` — マイグレーション・永続化のテスト
+- [x] `stores/__tests__/nurseryStore.test.ts` — store操作のテスト（追加、更新、削除、フラグ管理）
+- [x] `services/__tests__/storageService.test.ts` — マイグレーション・永続化のテスト
 
 ### Step 6: オンボーディング
 - [ ] `components/onboarding/OnboardingDialog.tsx` — 初回オンボーディング画面
