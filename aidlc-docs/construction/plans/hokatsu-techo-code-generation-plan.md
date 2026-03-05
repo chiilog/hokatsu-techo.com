@@ -12,12 +12,13 @@ US-01〜US-13（全13ストーリー）
 ## 生成ステップ
 
 ### Step 1: プロジェクト初期化・設定ファイル
-- [ ] Next.js プロジェクト作成（`package.json`, `tsconfig.json`, `next.config.ts`）
-- [ ] Tailwind CSS 設定（`tailwind.config.ts`, `postcss.config.mjs`）
-- [ ] shadcn/ui 初期化（`components.json`）
-- [ ] Vitest + Testing Library 設定（`vitest.config.ts`, `vitest.setup.ts`）
-- [ ] ESLint 設定（`eslint.config.mjs`）
-- [ ] `.gitignore` 更新
+- [x] Next.js プロジェクト作成（`package.json`, `tsconfig.json`, `next.config.ts`）
+- [x] Tailwind CSS v4 設定（`postcss.config.mjs`、CSS内で `@import "tailwindcss"` を使用）
+- [x] shadcn/ui 初期化（`components.json`）
+- [x] Vitest + Testing Library 設定（`vitest.config.ts`, `vitest.setup.ts`）
+- [x] Biome 設定（`biome.json` — Linter + Formatter）
+- [x] lefthook 設定（`lefthook.yml` — pre-commit で Biome チェック実行）
+- [x] `.gitignore` 更新
 - [ ] PWA設定（`next.config.ts` にPWAプラグイン追加、`public/manifest.json`）
 
 ### Step 2: 共通レイアウト・グローバルスタイル
@@ -193,10 +194,10 @@ hokatsu-techo.com/
   package.json
   tsconfig.json
   next.config.ts
-  tailwind.config.ts
   postcss.config.mjs
   vitest.config.ts
   vitest.setup.ts
-  eslint.config.mjs
+  biome.json
+  lefthook.yml
   components.json
 ```
