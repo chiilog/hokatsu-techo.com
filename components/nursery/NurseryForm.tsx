@@ -1,16 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useNurseryStore } from "@/stores/nurseryStore";
 
-export function NurseryForm() {
-	const router = useRouter();
-	const addNursery = useNurseryStore((s) => s.addNursery);
+interface NurseryFormProps {
+	onAdd: (name: string, visitDate: string | null) => void;
+}
 
+export function NurseryForm({ onAdd }: NurseryFormProps) {
 	const [name, setName] = useState("");
 	const [visitDate, setVisitDate] = useState("");
 
@@ -20,8 +19,7 @@ export function NurseryForm() {
 		e.preventDefault();
 		if (!isValid) return;
 
-		addNursery(name, visitDate || null);
-		router.push("/");
+		onAdd(name, visitDate || null);
 	};
 
 	return (

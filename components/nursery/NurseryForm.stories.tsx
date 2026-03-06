@@ -7,6 +7,9 @@ const meta = {
 	parameters: {
 		layout: "padded",
 	},
+	args: {
+		onAdd: () => {},
+	},
 } satisfies Meta<typeof NurseryForm>;
 
 export default meta;
