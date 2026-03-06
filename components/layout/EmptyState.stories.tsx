@@ -24,3 +24,11 @@ export const MessageOnly: Story = {
     message: "データがありません",
   },
 };
+
+export const WithAddButton: Story = {
+  args: {
+    message: "まだ園が登録されていません",
+    description: "見学候補の園を追加しましょう",
+    showAddButton: true,
+  },
+};

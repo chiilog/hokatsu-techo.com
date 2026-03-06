@@ -38,6 +38,7 @@ lerna-debug.log*
 *.sw?
 .serena
 .playwright-mcp
+.mcp.json
 
 # TypeScript
 *.tsbuildinfo

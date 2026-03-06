@@ -11,16 +11,19 @@ export function NurseryList({ nurseries }: NurseryListProps) {
     return (
       <EmptyState
         message="まだ園が登録されていません"
-        description="「園を追加する」ボタンから、見学候補の園を追加しましょう"
+        description="見学候補の園を追加しましょう"
+        showAddButton
       />
     );
   }
 
   return (
-    <div className="space-y-3" data-testid="nursery-list">
+    <ul className="space-y-3" data-testid="nursery-list">
       {nurseries.map((nursery) => (
-        <NurseryCard key={nursery.id} nursery={nursery} />
+        <li key={nursery.id}>
+          <NurseryCard nursery={nursery} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

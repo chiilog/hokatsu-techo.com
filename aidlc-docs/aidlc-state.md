@@ -4,7 +4,7 @@
 - **Project Name**: hokatsu-techo (保活手帳)
 - **Project Type**: Greenfield (プロトタイプからのリプレイス)
 - **Start Date**: 2026-03-05T00:00:00Z
-- **Current Stage**: CONSTRUCTION - Code Generation
+- **Current Stage**: CONSTRUCTION - Build and Test (COMPLETE)
 
 ## Workspace State
 - **Existing Code**: No (ワークスペースルートにソースコードなし)
@@ -39,8 +39,8 @@
 - [ ] NFR Requirements (SKIP)
 - [ ] NFR Design (SKIP)
 - [ ] Infrastructure Design (SKIP)
-- [ ] Code Generation (EXECUTE)
-- [ ] Build and Test (EXECUTE)
+- [x] Code Generation (COMPLETE)
+- [x] Build and Test (COMPLETE)
 
 ### OPERATIONS PHASE
 - [ ] Operations (PLACEHOLDER)

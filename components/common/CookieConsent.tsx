@@ -24,6 +24,8 @@ export function CookieConsent() {
       )}
       {isUndecided && (
         <div
+          role="dialog"
+          aria-label="Cookie使用の同意"
           className="fixed inset-x-0 bottom-0 z-50 border-t bg-background p-4 shadow-lg"
           data-testid="cookie-consent-banner"
         >

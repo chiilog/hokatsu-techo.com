@@ -19,7 +19,7 @@ US-01〜US-13（全13ストーリー）
 - [x] Biome 設定（`biome.json` — Linter + Formatter）
 - [x] lefthook 設定（`lefthook.yml` — pre-commit で Biome チェック実行）
 - [x] `.gitignore` 更新
-- [ ] PWA設定（`next.config.ts` にPWAプラグイン追加、`public/manifest.json`）
+- [x] PWA設定（`next.config.ts` にPWAプラグイン追加、`public/manifest.json`）
 
 ### Step 2: 共通レイアウト・グローバルスタイル
 - [x] `app/layout.tsx` — ルートレイアウト（メタデータ、フォント、グローバルCSS）
@@ -42,65 +42,63 @@ US-01〜US-13（全13ストーリー）
 - [x] `services/storageService.test.ts` — マイグレーション・永続化のテスト
 
 ### Step 6: オンボーディング
-- [ ] `components/onboarding/OnboardingDialog.tsx` — 初回オンボーディング画面
-- [ ] `components/onboarding/OnboardingDialog.test.tsx` — テスト
-- [ ] **ストーリーカバレッジ**: US-03（アプリの使い方を知る）、US-13（アプリ説明の再確認）
+- [x] `components/onboarding/OnboardingDialog.tsx` — 初回オンボーディング画面
+- [x] `components/onboarding/OnboardingDialog.test.tsx` — テスト
+- [x] **ストーリーカバレッジ**: US-03（アプリの使い方を知る）、US-13（アプリ説明の再確認）
 
 ### Step 7: 園一覧ページ（ホーム）
-- [ ] `components/nursery/NurseryCard.tsx` — 園カード
-- [ ] `components/nursery/NurseryList.tsx` — カードリスト + 空状態
-- [ ] `components/layout/EmptyState.tsx` — 空状態メッセージ
-- [ ] `app/page.tsx` — 園一覧ページ（オンボーディング + ヘルプ統合）
-- [ ] **ストーリーカバレッジ**: US-10（園一覧を見返す）、US-11（メモプレビュー）、US-03, US-13
+- [x] `components/nursery/NurseryCard.tsx` — 園カード
+- [x] `components/nursery/NurseryList.tsx` — カードリスト + 空状態
+- [x] `components/layout/EmptyState.tsx` — 空状態メッセージ + 園追加導線
+- [x] `app/page.tsx` — 園一覧ページ（オンボーディング + ヘルプ統合）
+- [x] **ストーリーカバレッジ**: US-10（園一覧を見返す）、US-11（メモプレビュー）、US-03, US-13
 
 ### Step 8: 園一覧ページのテスト
-- [ ] `components/nursery/NurseryCard.test.tsx`
-- [ ] `components/nursery/NurseryList.test.tsx`
-- [ ] `app/page.test.tsx` — 園一覧ページのテスト
+- [x] `components/nursery/NurseryCard.test.tsx`
+- [x] `components/nursery/NurseryList.test.tsx`
 
 ### Step 9: 園追加ページ
-- [ ] `components/nursery/NurseryForm.tsx` — 園追加フォーム（園名 + 見学日 + バリデーション）
-- [ ] `app/add/page.tsx` — 園追加ページ
-- [ ] **ストーリーカバレッジ**: US-01（園を追加する）、US-02（見学日を設定する）
+- [x] `components/nursery/NurseryForm.tsx` — 園追加フォーム（園名 + 見学日 + バリデーション）
+- [x] `app/add/page.tsx` — 園追加ページ
+- [x] **ストーリーカバレッジ**: US-01（園を追加する）、US-02（見学日を設定する）
 
 ### Step 10: 園追加ページのテスト
-- [ ] `components/nursery/NurseryForm.test.tsx`
-- [ ] `app/add/page.test.tsx`
+- [x] `components/nursery/NurseryForm.test.tsx`
 
 ### Step 11: 園詳細ページ
-- [ ] `components/nursery/NurseryDetail.tsx` — インライン編集UI（園名、見学日、メモ）
-- [ ] `components/nursery/DeleteNurseryDialog.tsx` — 削除確認ダイアログ
-- [ ] `components/nursery/VisitTipsDialog.tsx` — 見学のコツダイアログ
-- [ ] `app/nursery/[id]/page.tsx` — 園詳細ページ
-- [ ] **ストーリーカバレッジ**: US-04, US-05, US-06, US-07, US-08, US-09, US-11, US-12
+- [x] `components/nursery/NurseryDetail.tsx` — インライン編集UI（園名、見学日、メモ）
+- [x] `components/nursery/DeleteNurseryDialog.tsx` — 削除確認ダイアログ
+- [x] `components/nursery/VisitTipsDialog.tsx` — 見学のコツダイアログ
+- [x] `app/nursery/[id]/page.tsx` — 園詳細ページ
+- [x] **ストーリーカバレッジ**: US-04, US-05, US-06, US-07, US-08, US-09, US-11, US-12
 
 ### Step 12: 園詳細ページのテスト
-- [ ] `components/nursery/NurseryDetail.test.tsx`
-- [ ] `components/nursery/DeleteNurseryDialog.test.tsx`
-- [ ] `components/nursery/VisitTipsDialog.test.tsx`
-- [ ] `app/nursery/[id]/page.test.tsx`
+- [x] `components/nursery/NurseryDetail.test.tsx`
+- [x] `components/nursery/DeleteNurseryDialog.test.tsx`
+- [x] `components/nursery/VisitTipsDialog.test.tsx`
 
 ### Step 13: アナリティクス・Cookie同意
-- [ ] `services/analyticsService.ts` — GA4 + Clarity 初期化・イベント送信
-- [ ] `hooks/useCookieConsent.ts` — Cookie同意管理フック
-- [ ] `components/common/CookieConsent.tsx` — Cookie同意バナー
-- [ ] `components/common/CookieConsent.test.tsx`
-- [ ] **ストーリーカバレッジ**: NFR-04（アナリティクス）
+- [x] `services/analyticsService.ts` — Clarity 初期化
+- [x] `services/analyticsService.test.ts` — テスト
+- [x] `hooks/useCookieConsent.ts` — Cookie同意管理フック
+- [x] `components/common/CookieConsent.tsx` — Cookie同意バナー
+- [x] `components/common/CookieConsent.test.tsx`
+- [x] **ストーリーカバレッジ**: NFR-04（アナリティクス）
 
 ### Step 14: セキュリティヘッダー・エラーハンドリング
-- [ ] `middleware.ts` — HTTPセキュリティヘッダー（CSP, HSTS, X-Content-Type-Options等）
-- [ ] `app/not-found.tsx` — 404ページ
-- [ ] `app/error.tsx` — グローバルエラーハンドラー（汎用エラーメッセージ表示）
-- [ ] **ストーリーカバレッジ**: SECURITY-04, SECURITY-09, SECURITY-15
+- [x] `middleware.ts` — HTTPセキュリティヘッダー（HSTS, X-Content-Type-Options等）
+- [x] `app/not-found.tsx` — 404ページ
+- [x] `app/error.tsx` — グローバルエラーハンドラー（汎用エラーメッセージ表示）
+- [x] **ストーリーカバレッジ**: SECURITY-04, SECURITY-09, SECURITY-15
 
 ### Step 15: PWA アセット
-- [ ] `public/manifest.json` — Web App Manifest
-- [ ] `public/icons/` — アプリアイコン（プレースホルダー）
-- [ ] Service Worker設定の確認
-- [ ] **ストーリーカバレッジ**: NFR-03（PWA）
+- [x] `public/manifest.json` — Web App Manifest
+- [x] `public/icons/` — アプリアイコン（プレースホルダー .gitkeep）
+- [x] `next.config.ts` — @ducanh2912/next-pwa プラグイン設定
+- [x] **ストーリーカバレッジ**: NFR-03（PWA）
 
 ### Step 16: コード生成サマリー
-- [ ] `aidlc-docs/construction/hokatsu-techo/code/code-summary.md` — 生成ファイル一覧、ストーリーマッピング
+- [x] `aidlc-docs/construction/hokatsu-techo/code/code-summary.md` — 生成ファイル一覧、ストーリーマッピング
 
 ---
 
@@ -108,19 +106,19 @@ US-01〜US-13（全13ストーリー）
 
 | ストーリー | 実装ステップ | 状態 |
 |-----------|-------------|------|
-| US-01: 園を追加する | Step 4, 9 | [ ] |
-| US-02: 見学日を設定する | Step 4, 9 | [ ] |
-| US-03: アプリの使い方を知る | Step 6, 7 | [ ] |
-| US-04: メモを書く | Step 4, 11 | [ ] |
-| US-05: 見学のコツを知る | Step 11 | [ ] |
-| US-06: メモを編集する | Step 11 | [ ] |
-| US-07: 園名を編集する | Step 11 | [ ] |
-| US-08: 見学日を変更する | Step 11 | [ ] |
-| US-09: 園を削除する | Step 11 | [ ] |
-| US-10: 園一覧を見返す | Step 7 | [ ] |
-| US-11: メモを読んで思い出す | Step 7, 11 | [ ] |
-| US-12: 見学のコツを再確認する | Step 11 | [ ] |
-| US-13: アプリ説明を再確認する | Step 2, 6, 7 | [ ] |
+| US-01: 園を追加する | Step 4, 9 | [x] |
+| US-02: 見学日を設定する | Step 4, 9 | [x] |
+| US-03: アプリの使い方を知る | Step 6, 7 | [x] |
+| US-04: メモを書く | Step 4, 11 | [x] |
+| US-05: 見学のコツを知る | Step 11 | [x] |
+| US-06: メモを編集する | Step 11 | [x] |
+| US-07: 園名を編集する | Step 11 | [x] |
+| US-08: 見学日を変更する | Step 11 | [x] |
+| US-09: 園を削除する | Step 11 | [x] |
+| US-10: 園一覧を見返す | Step 7 | [x] |
+| US-11: メモを読んで思い出す | Step 7, 11 | [x] |
+| US-12: 見学のコツを再確認する | Step 11 | [x] |
+| US-13: アプリ説明を再確認する | Step 2, 6, 7 | [x] |
 
 ---
 
@@ -131,17 +129,14 @@ hokatsu-techo.com/
   app/
     layout.tsx
     page.tsx
-    page.test.tsx
     globals.css
     not-found.tsx
     error.tsx
     add/
       page.tsx
-      page.test.tsx
     nursery/
       [id]/
         page.tsx
-        page.test.tsx
   components/
     layout/
       Header.tsx
@@ -173,12 +168,14 @@ hokatsu-techo.com/
     storageService.ts
     storageService.test.ts
     analyticsService.ts
+    analyticsService.test.ts
   hooks/
     useCookieConsent.ts
   types/
     nursery.ts
   lib/
     utils.ts
+    formatDate.ts
   middleware.ts
   public/
     manifest.json

@@ -9,6 +9,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { formatVisitDate } from "@/lib/formatDate";
 import type { Nursery } from "@/types/nursery";
 
+type EditableField = "name" | "visitDate" | "memo";
+
 interface NurseryDetailProps {
   nursery: Nursery;
   onUpdate: (updates: Partial<Omit<Nursery, "id" | "createdAt">>) => void;
@@ -20,15 +22,13 @@ export function NurseryDetail({
   onUpdate,
   onVisitTipsClick,
 }: NurseryDetailProps) {
-  const [editingField, setEditingField] = useState<
-    "name" | "visitDate" | "memo" | null
-  >(null);
+  const [editingField, setEditingField] = useState<EditableField | null>(null);
   const [editName, setEditName] = useState(nursery.name);
   const [editDate, setEditDate] = useState(nursery.visitDate ?? "");
   const [editMemo, setEditMemo] = useState(nursery.memo);
   const [nameError, setNameError] = useState("");
 
-  const startEdit = (field: "name" | "visitDate" | "memo") => {
+  const startEdit = (field: EditableField) => {
     setEditingField(field);
     setEditName(nursery.name);
     setEditDate(nursery.visitDate ?? "");
@@ -66,19 +66,28 @@ export function NurseryDetail({
     <div className="space-y-6" data-testid="nursery-detail">
       {/* 園名 */}
       <div className="space-y-2">
-        <Label>園名</Label>
+        <Label htmlFor={editingField === "name" ? "edit-name" : undefined}>
+          園名
+        </Label>
         {editingField === "name" ? (
           <div className="space-y-2">
             <Input
+              id="edit-name"
               value={editName}
               onChange={(e) => {
                 setEditName(e.target.value);
                 setNameError("");
               }}
+              aria-invalid={nameError ? true : undefined}
+              aria-describedby={nameError ? "name-error" : undefined}
               data-testid="edit-name-input"
             />
             {nameError && (
-              <p className="text-destructive text-sm" data-testid="name-error">
+              <p
+                id="name-error"
+                className="text-destructive text-sm"
+                data-testid="name-error"
+              >
                 {nameError}
               </p>
             )}
@@ -116,10 +125,13 @@ export function NurseryDetail({
 
       {/* 見学日 */}
       <div className="space-y-2">
-        <Label>見学日</Label>
+        <Label htmlFor={editingField === "visitDate" ? "edit-date" : undefined}>
+          見学日
+        </Label>
         {editingField === "visitDate" ? (
           <div className="space-y-2">
             <Input
+              id="edit-date"
               type="date"
               value={editDate}
               onChange={(e) => setEditDate(e.target.value)}
@@ -161,7 +173,9 @@ export function NurseryDetail({
       {/* メモ */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <Label>メモ</Label>
+          <Label htmlFor={editingField === "memo" ? "edit-memo" : undefined}>
+            メモ
+          </Label>
           {editingField !== "memo" && (
             <Button
               variant="ghost"
@@ -178,6 +192,7 @@ export function NurseryDetail({
         {editingField === "memo" ? (
           <div className="space-y-2">
             <Textarea
+              id="edit-memo"
               value={editMemo}
               onChange={(e) => setEditMemo(e.target.value)}
               placeholder="気づいたことを自由に書けます"
