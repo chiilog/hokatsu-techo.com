@@ -1,14 +1,8 @@
 export interface Nursery {
-	id: string;
-	name: string;
-	visitDate: string | null;
-	memo: string;
-	createdAt: string;
-	updatedAt: string;
-}
-
-export interface AppState {
-	schemaVersion: number;
-	nurseries: Nursery[];
-	hasSeenOnboarding: boolean;
+  id: string;
+  name: string;
+  visitDate: string | null;
+  memo: string;
+  createdAt: string;
+  updatedAt: string;
 }
