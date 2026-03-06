@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { NurseryList } from "@/components/nursery/NurseryList";
 import { OnboardingDialog } from "@/components/onboarding/OnboardingDialog";
@@ -14,11 +14,16 @@ export default function Home() {
 	const hasSeenOnboarding = useNurseryStore((s) => s.hasSeenOnboarding);
 	const setOnboardingSeen = useNurseryStore((s) => s.setOnboardingSeen);
 
-	const [showOnboarding, setShowOnboarding] = useState(!hasSeenOnboarding);
+	const [hydrated, setHydrated] = useState(false);
 	const [showHelp, setShowHelp] = useState(false);
 
+	useEffect(() => {
+		setHydrated(true);
+	}, []);
+
+	const showOnboarding = hydrated && !hasSeenOnboarding;
+
 	const handleOnboardingClose = () => {
-		setShowOnboarding(false);
 		setOnboardingSeen();
 	};
 
