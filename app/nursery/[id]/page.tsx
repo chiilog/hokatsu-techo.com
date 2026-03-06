@@ -3,11 +3,12 @@
 import { ArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DeleteNurseryDialog } from "@/components/nursery/DeleteNurseryDialog";
 import { NurseryDetail } from "@/components/nursery/NurseryDetail";
 import { VisitTipsDialog } from "@/components/nursery/VisitTipsDialog";
 import { Button } from "@/components/ui/button";
+import { useHydrated } from "@/hooks/useHydrated";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 export default function NurseryDetailPage() {
@@ -21,17 +22,14 @@ export default function NurseryDetailPage() {
   const hasSeenVisitTips = useNurseryStore((s) => s.hasSeenVisitTips);
   const setVisitTipsSeen = useNurseryStore((s) => s.setVisitTipsSeen);
 
-  const [showVisitTips, setShowVisitTips] = useState(false);
+  const hydrated = useHydrated();
+  const [showVisitTipsManual, setShowVisitTipsManual] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
-  useEffect(() => {
-    if (!hasSeenVisitTips) {
-      setShowVisitTips(true);
-    }
-  }, [hasSeenVisitTips]);
+  const showVisitTips = showVisitTipsManual || (hydrated && !hasSeenVisitTips);
 
   const handleVisitTipsClose = () => {
-    setShowVisitTips(false);
+    setShowVisitTipsManual(false);
     setVisitTipsSeen();
   };
 
@@ -90,7 +88,7 @@ export default function NurseryDetailPage() {
         <NurseryDetail
           nursery={nursery}
           onUpdate={(updates) => updateNursery(id, updates)}
-          onVisitTipsClick={() => setShowVisitTips(true)}
+          onVisitTipsClick={() => setShowVisitTipsManual(true)}
         />
       </main>
 

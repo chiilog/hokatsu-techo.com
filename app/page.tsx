@@ -2,11 +2,12 @@
 
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { NurseryList } from "@/components/nursery/NurseryList";
 import { OnboardingDialog } from "@/components/onboarding/OnboardingDialog";
 import { Button } from "@/components/ui/button";
+import { useHydrated } from "@/hooks/useHydrated";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 export default function Home() {
@@ -14,12 +15,8 @@ export default function Home() {
   const hasSeenOnboarding = useNurseryStore((s) => s.hasSeenOnboarding);
   const setOnboardingSeen = useNurseryStore((s) => s.setOnboardingSeen);
 
-  const [hydrated, setHydrated] = useState(false);
+  const hydrated = useHydrated();
   const [showHelp, setShowHelp] = useState(false);
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
 
   const showOnboarding = hydrated && !hasSeenOnboarding;
 
