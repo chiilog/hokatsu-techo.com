@@ -1,43 +1,43 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.5/schema.json",
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true
-	},
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab"
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double",
-			"semicolons": "always"
-		}
-	},
-	"css": {
-		"parser": {
-			"tailwindDirectives": true
-		}
-	},
-	"files": {
-		"includes": [
-			"app/**",
-			"components/**",
-			"hooks/**",
-			"lib/**",
-			"services/**",
-			"stores/**",
-			"types/**",
-			"*.ts",
-			"*.tsx",
-			"*.json"
-		]
-	}
+  "$schema": "https://biomejs.dev/schemas/2.4.5/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "files": {
+    "includes": [
+      "app/**",
+      "components/**",
+      "hooks/**",
+      "lib/**",
+      "services/**",
+      "stores/**",
+      "types/**",
+      "*.ts",
+      "*.tsx",
+      "*.json"
+    ]
+  }
 }
