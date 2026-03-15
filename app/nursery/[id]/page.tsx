@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Trash2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -63,24 +63,13 @@ export default function NurseryDetailPage() {
   return (
     <>
       <header className="sticky top-0 z-10 border-b bg-background">
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" asChild>
-              <Link href="/" aria-label="戻る">
-                <ArrowLeft className="h-5 w-5" />
-              </Link>
-            </Button>
-            <h1 className="font-bold text-lg">園の詳細</h1>
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setShowDeleteDialog(true)}
-            aria-label="この園を削除"
-            data-testid="delete-nursery-button"
-          >
-            <Trash2 className="h-5 w-5 text-destructive" />
+        <div className="flex items-center gap-2 px-4 py-3">
+          <Button variant="ghost" size="icon" asChild>
+            <Link href="/" aria-label="戻る">
+              <ArrowLeft className="h-5 w-5" />
+            </Link>
           </Button>
+          <h1 className="font-bold text-lg">園の詳細</h1>
         </div>
       </header>
 
@@ -90,6 +79,17 @@ export default function NurseryDetailPage() {
           onUpdate={(updates) => updateNursery(id, updates)}
           onVisitTipsClick={() => setShowVisitTipsManual(true)}
         />
+
+        <div className="mt-12 border-t pt-6">
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={() => setShowDeleteDialog(true)}
+            data-testid="delete-nursery-button"
+          >
+            この園を削除する
+          </Button>
+        </div>
       </main>
 
       <VisitTipsDialog open={showVisitTips} onClose={handleVisitTipsClose} />
