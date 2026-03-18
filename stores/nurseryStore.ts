@@ -45,10 +45,14 @@ export const useNurseryStore = create<NurseryStore>()(
       },
 
       updateNursery: (id, updates) => {
+        const sanitized =
+          updates.name !== undefined
+            ? { ...updates, name: updates.name.trim() }
+            : updates;
         set((state) => ({
           nurseries: state.nurseries.map((n) =>
             n.id === id
-              ? { ...n, ...updates, updatedAt: new Date().toISOString() }
+              ? { ...n, ...sanitized, updatedAt: new Date().toISOString() }
               : n,
           ),
         }));

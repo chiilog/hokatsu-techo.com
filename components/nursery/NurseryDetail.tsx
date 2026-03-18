@@ -41,7 +41,7 @@ export function NurseryDetail({
       setNameError("園名を入力してください");
       return;
     }
-    onUpdate({ name: editName.trim() });
+    onUpdate({ name: editName });
     setEditingField(null);
   };
 
