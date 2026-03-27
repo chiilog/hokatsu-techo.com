@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 vi.mock("@/services/storageService", () => ({
@@ -21,7 +21,7 @@ describe("nurseryStore", () => {
   });
 
   describe("addNursery", () => {
-    it("園を追加できる", () => {
+    it("園名・見学日・メモが正しく設定される", () => {
       useNurseryStore.getState().addNursery("テスト保育園", "2026-04-01");
 
       const { nurseries } = useNurseryStore.getState();
@@ -29,6 +29,12 @@ describe("nurseryStore", () => {
       expect(nurseries[0].name).toBe("テスト保育園");
       expect(nurseries[0].visitDate).toBe("2026-04-01");
       expect(nurseries[0].memo).toBe("");
+    });
+
+    it("id, createdAt, updatedAtが自動生成される", () => {
+      useNurseryStore.getState().addNursery("テスト保育園", null);
+
+      const { nurseries } = useNurseryStore.getState();
       expect(nurseries[0].id).toBeDefined();
       expect(nurseries[0].createdAt).toBeDefined();
       expect(nurseries[0].updatedAt).toBeDefined();
@@ -59,33 +65,48 @@ describe("nurseryStore", () => {
   });
 
   describe("updateNursery", () => {
-    it("園名を更新できる", () => {
-      useNurseryStore.getState().addNursery("テスト保育園", null);
-      const id = useNurseryStore.getState().nurseries[0].id;
+    let nurseryId: string;
 
-      useNurseryStore.getState().updateNursery(id, { name: "更新後の園名" });
+    beforeEach(() => {
+      useNurseryStore.getState().addNursery("テスト保育園", null);
+      nurseryId = useNurseryStore.getState().nurseries[0].id;
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("園名を更新できる", () => {
+      useNurseryStore
+        .getState()
+        .updateNursery(nurseryId, { name: "更新後の園名" });
 
       const { nurseries } = useNurseryStore.getState();
       expect(nurseries[0].name).toBe("更新後の園名");
     });
 
     it("メモを更新できる", () => {
-      useNurseryStore.getState().addNursery("テスト保育園", null);
-      const id = useNurseryStore.getState().nurseries[0].id;
-
       useNurseryStore
         .getState()
-        .updateNursery(id, { memo: "先生が優しそうだった" });
+        .updateNursery(nurseryId, { memo: "先生が優しそうだった" });
 
       const { nurseries } = useNurseryStore.getState();
       expect(nurseries[0].memo).toBe("先生が優しそうだった");
     });
 
-    it("見学日を更新できる", () => {
-      useNurseryStore.getState().addNursery("テスト保育園", null);
-      const id = useNurseryStore.getState().nurseries[0].id;
+    it("更新時に園名の前後の空白をトリムする", () => {
+      useNurseryStore
+        .getState()
+        .updateNursery(nurseryId, { name: "  更新後の園名  " });
 
-      useNurseryStore.getState().updateNursery(id, { visitDate: "2026-05-15" });
+      const { nurseries } = useNurseryStore.getState();
+      expect(nurseries[0].name).toBe("更新後の園名");
+    });
+
+    it("見学日を更新できる", () => {
+      useNurseryStore
+        .getState()
+        .updateNursery(nurseryId, { visitDate: "2026-05-15" });
 
       const { nurseries } = useNurseryStore.getState();
       expect(nurseries[0].visitDate).toBe("2026-05-15");
@@ -95,18 +116,16 @@ describe("nurseryStore", () => {
       vi.useFakeTimers();
       vi.setSystemTime(new Date("2026-03-05T10:00:00Z"));
 
-      useNurseryStore.getState().addNursery("テスト保育園", null);
-      const id = useNurseryStore.getState().nurseries[0].id;
+      useNurseryStore.getState().addNursery("タイムスタンプ検証用", null);
+      const targetId = useNurseryStore.getState().nurseries[0].id;
       const originalUpdatedAt =
         useNurseryStore.getState().nurseries[0].updatedAt;
 
       vi.setSystemTime(new Date("2026-03-05T10:01:00Z"));
-      useNurseryStore.getState().updateNursery(id, { name: "更新後" });
+      useNurseryStore.getState().updateNursery(targetId, { name: "更新後" });
 
       const { nurseries } = useNurseryStore.getState();
       expect(nurseries[0].updatedAt).not.toBe(originalUpdatedAt);
-
-      vi.useRealTimers();
     });
   });
 
