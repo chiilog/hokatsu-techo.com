@@ -6,6 +6,11 @@ declare global {
 
 const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? "";
 
+/**
+ * Microsoft Clarityのトラッキングスクリプトを初期化する。
+ * 環境変数にプロジェクトIDが設定されていない場合、SSR環境の場合、
+ * または既にスクリプトが挿入済みの場合は何もしない。
+ */
 export function initClarity(): void {
   if (!CLARITY_PROJECT_ID || typeof window === "undefined") return;
   if (!/^[a-z0-9]+$/i.test(CLARITY_PROJECT_ID)) return;
