@@ -12,9 +12,9 @@ import { useHydrated } from "@/hooks/useHydrated";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 export default function NurseryDetailPage() {
-  const params = useParams();
+  const params = useParams<{ id: string }>();
   const router = useRouter();
-  const id = params.id as string;
+  const id = params.id;
 
   const nursery = useNurseryStore((s) => s.nurseries.find((n) => n.id === id));
   const updateNursery = useNurseryStore((s) => s.updateNursery);
