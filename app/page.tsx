@@ -19,9 +19,11 @@ export default function Home() {
   const [showHelp, setShowHelp] = useState(false);
 
   const showOnboarding = hydrated && !hasSeenOnboarding;
+  const dialogOpen = showOnboarding || showHelp;
 
-  const handleOnboardingClose = () => {
-    setOnboardingSeen();
+  const handleDialogClose = () => {
+    if (showOnboarding) setOnboardingSeen();
+    setShowHelp(false);
   };
 
   return (
@@ -42,9 +44,7 @@ export default function Home() {
         <NurseryList nurseries={nurseries} />
       </main>
 
-      <OnboardingDialog open={showOnboarding} onClose={handleOnboardingClose} />
-
-      <OnboardingDialog open={showHelp} onClose={() => setShowHelp(false)} />
+      <OnboardingDialog open={dialogOpen} onClose={handleDialogClose} />
     </>
   );
 }
