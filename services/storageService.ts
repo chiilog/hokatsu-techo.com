@@ -1,8 +1,16 @@
 import type { StateStorage } from "zustand/middleware";
 
-const STORAGE_KEY = "hokatsu-techo";
+const STORAGE_KEYS = {
+  nursery: "hokatsu-techo",
+  cookieConsent: "hokatsu-techo-cookie-consent",
+} as const;
+
 const CURRENT_SCHEMA_VERSION = 1;
 
+/**
+ * localStorageから読み込んだ永続化データの型。
+ * JSON.parseした信頼できないデータを扱うため、各フィールドはunknown型としている。
+ */
 interface PersistedState {
   state: {
     nurseries: unknown[];
@@ -12,6 +20,13 @@ interface PersistedState {
   version?: number;
 }
 
+/**
+ * 永続化データのスキーマバージョンが古い場合に最新バージョンへマイグレーションする。
+ * 既存の値を引き継ぎつつ、存在しないフィールドにはデフォルト値を設定する。
+ * バージョンが最新の場合はそのまま返す。
+ * @param parsed - localStorageからパースした永続化データ
+ * @returns マイグレーション済みの永続化データ
+ */
 function migrate(parsed: PersistedState): PersistedState {
   const version = parsed.version ?? 0;
 
@@ -30,7 +45,19 @@ function migrate(parsed: PersistedState): PersistedState {
   return parsed;
 }
 
+/**
+ * Zustand persist ミドルウェア用のカスタムストレージ。
+ * 読み込み時にスキーマのマイグレーションを実行し、
+ * バージョンが古いデータを自動的に最新の形式へ変換する。
+ */
 export const customStorage: StateStorage = {
+  /**
+   * localStorageからデータを読み込み、必要に応じてマイグレーションを実行する。
+   * マイグレーションが発生した場合はlocalStorageへ書き戻す。
+   * SSR環境ではnullを返す。
+   * @param name - ストレージキー
+   * @returns JSON文字列またはnull
+   */
   getItem(name: string): string | null {
     if (typeof window === "undefined") return null;
     const raw = localStorage.getItem(name);
@@ -59,4 +86,4 @@ export const customStorage: StateStorage = {
   },
 };
 
-export { STORAGE_KEY, CURRENT_SCHEMA_VERSION };
+export { STORAGE_KEYS, CURRENT_SCHEMA_VERSION };

@@ -2,7 +2,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 vi.mock("@/services/storageService", () => ({
-  STORAGE_KEY: "hokatsu-techo-test",
+  STORAGE_KEYS: {
+    nursery: "hokatsu-techo-test",
+    cookieConsent: "hokatsu-techo-cookie-consent-test",
+  },
   CURRENT_SCHEMA_VERSION: 1,
   customStorage: {
     getItem: () => null,

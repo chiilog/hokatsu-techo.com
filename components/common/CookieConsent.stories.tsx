@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { STORAGE_KEYS } from "@/services/storageService";
 import { CookieConsent } from "./CookieConsent";
 
 const meta = {
@@ -9,7 +10,7 @@ const meta = {
   },
   decorators: [
     (Story) => {
-      localStorage.removeItem("hokatsu-techo-cookie-consent");
+      localStorage.removeItem(STORAGE_KEYS.cookieConsent);
       return <Story />;
     },
   ],

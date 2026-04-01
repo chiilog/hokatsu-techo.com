@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-
-const CONSENT_KEY = "hokatsu-techo-cookie-consent";
+import { STORAGE_KEYS } from "@/services/storageService";
 
 type ConsentStatus = "undecided" | "accepted" | "declined";
 
@@ -10,19 +9,19 @@ export function useCookieConsent() {
   const [consent, setConsent] = useState<ConsentStatus>("undecided");
 
   useEffect(() => {
-    const stored = localStorage.getItem(CONSENT_KEY);
+    const stored = localStorage.getItem(STORAGE_KEYS.cookieConsent);
     if (stored === "accepted" || stored === "declined") {
       setConsent(stored);
     }
   }, []);
 
   const accept = useCallback(() => {
-    localStorage.setItem(CONSENT_KEY, "accepted");
+    localStorage.setItem(STORAGE_KEYS.cookieConsent, "accepted");
     setConsent("accepted");
   }, []);
 
   const decline = useCallback(() => {
-    localStorage.setItem(CONSENT_KEY, "declined");
+    localStorage.setItem(STORAGE_KEYS.cookieConsent, "declined");
     setConsent("declined");
   }, []);
 

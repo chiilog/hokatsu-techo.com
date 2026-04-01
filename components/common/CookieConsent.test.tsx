@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { STORAGE_KEYS } from "@/services/storageService";
 import { CookieConsent } from "./CookieConsent";
 
 vi.mock("@next/third-parties/google", () => ({
@@ -34,9 +35,7 @@ describe("CookieConsent", () => {
     expect(
       screen.queryByTestId("cookie-consent-banner"),
     ).not.toBeInTheDocument();
-    expect(localStorage.getItem("hokatsu-techo-cookie-consent")).toBe(
-      "accepted",
-    );
+    expect(localStorage.getItem(STORAGE_KEYS.cookieConsent)).toBe("accepted");
   });
 
   it("同意しないボタンをクリックするとバナーが消える", async () => {
@@ -47,13 +46,11 @@ describe("CookieConsent", () => {
     expect(
       screen.queryByTestId("cookie-consent-banner"),
     ).not.toBeInTheDocument();
-    expect(localStorage.getItem("hokatsu-techo-cookie-consent")).toBe(
-      "declined",
-    );
+    expect(localStorage.getItem(STORAGE_KEYS.cookieConsent)).toBe("declined");
   });
 
   it("すでに同意済みの場合バナーは表示されない", () => {
-    localStorage.setItem("hokatsu-techo-cookie-consent", "accepted");
+    localStorage.setItem(STORAGE_KEYS.cookieConsent, "accepted");
     render(<CookieConsent />);
     expect(
       screen.queryByTestId("cookie-consent-banner"),
