@@ -295,3 +295,79 @@
 **Context**: CONSTRUCTION - Build and Test
 
 ---
+
+## 新規リクエスト: UX改善（自動保存・iOS風UI・見学日・メモ分離）
+**Timestamp**: 2026-04-01T00:00:00Z
+**User Input**: "- 保存をするって今は自動保存が主流だからボタン押すは逆にだるいかも。「（デバイスに）保存しました」みたいなトースターを出すのがいいのでは？
+- iOSみたいなUIも検討する。まるまるUI踏襲した方が学習コスト低いかも。
+- 見学日：今日・明日とかでもいいのでは？
+- 見学日とメモを分ける。聞きたいことのメモ。見学のコツは見れるから、「聞きたいメモ」と「当日メモ」をわけておく
+という案があります。とにかく「触る人が慣れているUIを踏襲する」（第一ペルソナのマイが難なく使えるのが望ましい）を第一にしたい。"
+**AI Response**: Workspace Detection実施。Brownfieldプロジェクト確認。既存コード・設計ドキュメント・ペルソナ情報を読み込み。Requirements Analysisに進む。
+**Context**: INCEPTION - Workspace Detection
+
+---
+
+## Requirements Analysis - 質問回答
+**Timestamp**: 2026-04-01T00:01:00Z
+**User Input**: ux-improvement-questions.md に回答記入。Q1: "Q2の回答を見て改めて質問して", Q2: "B, C, E。iOS設定アプリのchevron rightつきフィールド→遷移→戻ると保存", Q3: "今日または『あとで設定する』的なスキップ", Q4: "イメージはBだけど分けることは必要か？", Q5: "本番未稼働、メモなし", Q6: A（毎回トースト表示）, Q7: "これなんだっけ？"
+**AI Response**: Q1/Q4/Q7について曖昧さ・未確定あり。フォローアップ質問ファイルを作成。
+**Context**: INCEPTION - Requirements Analysis
+
+---
+
+## Requirements Analysis - フォローアップ回答
+**Timestamp**: 2026-04-01T00:02:00Z
+**User Input**: ux-improvement-clarification-questions.md に回答記入。Q1再確認: A（戻る操作で保存）, Q4再確認: A（メモ分離は見送り）, Q7: A（セキュリティ継続適用）, Q3補足: A（園追加は「今日/あとで」、園詳細はiOSカレンダー風アコーディオン）
+**AI Response**: 全回答確認、矛盾なし。要件定義書 requirements-ux-improvement.md を生成。
+**Context**: INCEPTION - Requirements Analysis
+
+---
+
+## Requirements Analysis - レビューフィードバック
+**Timestamp**: 2026-04-01T00:03:00Z
+**User Input**: "iOSの動きを踏襲するならトーストいらない？" → clarification質問作成 → 回答: "C。画面上部は操作するものが色々あって邪魔だから下でもいいかも？"
+**AI Response**: FR-UX-02を更新。「毎回トースト表示」→「iOS風の控えめなトースト、画面下部、約1秒で自動消去」に変更。
+**Context**: INCEPTION - Requirements Analysis
+
+---
+
+## Requirements Analysis - 承認
+**Timestamp**: 2026-04-01T00:04:00Z
+**User Input**: "承認"
+**AI Response**: 要件承認確認。Workflow Planningに進む。
+**Context**: INCEPTION - Requirements Analysis
+
+---
+
+## Workflow Planning - 承認
+**Timestamp**: 2026-04-02T00:00:00Z
+**User Input**: "承認します"
+**AI Response**: ワークフロー計画承認確認。Code Generation（Part 1: Planning）に進む。
+**Context**: INCEPTION - Workflow Planning
+
+---
+
+## Code Generation - UXレビュー反映
+**Timestamp**: 2026-04-02T00:01:00Z
+**User Input**: "プランを修正したいです。レビュー内容をdocs/ux-improvement-review.mdに書いたので確認して" — UXエンジニア観点レビュー7件（戻る＝保存モデル再考、スワイプ競合、トースト表示時間、3階層往復、カレンダー仕様、a11y、エラーハンドリング）
+**AI Response**: レビュー指摘を分析し、7つの対応方針確認質問を作成。回答: Q1: B（ハイブリッド保存モデル）、Q2: A→CSSトランジション、Q3: A（1.5-2秒+チェックマーク）、Q4: A（完了後自動復帰）、Q5: A（現在月or今月、過去可、日本語形式）、Q6: A（a11y全採用）、Q7: A（エラートースト+画面留まり）。要件定義書とコード生成プランを全面更新。14ステップに拡大（破棄確認ダイアログ追加等）。
+**Context**: CONSTRUCTION - Code Generation (Part 1: Planning)
+
+---
+
+## Code Generation - プラン承認
+**Timestamp**: 2026-04-02T00:02:00Z
+**User Input**: "承認します"
+**AI Response**: コード生成プラン承認確認。Part 2: Generation（Step 1）に進む。
+**Context**: CONSTRUCTION - Code Generation (Part 1 → Part 2)
+
+---
+
+## Code Generation - Part 2 完了
+**Timestamp**: 2026-04-02T00:03:00Z
+**User Input**: N/A（自動実行）
+**AI Response**: 全14ステップ実行完了。新規10ファイル作成、既存7ファイル変更。80テスト全パス、ビルド成功（8ルート）。
+**Context**: CONSTRUCTION - Code Generation (Part 2: Generation)
+
+---
