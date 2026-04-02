@@ -86,4 +86,4 @@ export const customStorage: StateStorage = {
   },
 };
 
-export { STORAGE_KEYS, CURRENT_SCHEMA_VERSION };
+export { CURRENT_SCHEMA_VERSION, STORAGE_KEYS };
