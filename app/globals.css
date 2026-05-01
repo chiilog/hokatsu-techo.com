@@ -75,3 +75,74 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* View Transitions: iOS風スライドアニメーション */
+
+/* 進む: 新しいページが右からスライドイン */
+@keyframes slide-from-right {
+  from {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-to-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-30%);
+    opacity: 0;
+  }
+}
+
+/* 戻る: 新しいページが左からスライドイン */
+@keyframes slide-from-left {
+  from {
+    transform: translateX(-30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-to-right {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+}
+
+/* 進むアニメーション */
+::view-transition-new(.slide-forward) {
+  animation: slide-from-right 0.25s ease-out both;
+}
+::view-transition-old(.slide-forward) {
+  animation: slide-to-left 0.25s ease-out both;
+}
+
+/* 戻るアニメーション */
+::view-transition-new(.slide-back) {
+  animation: slide-from-left 0.25s ease-out both;
+}
+::view-transition-old(.slide-back) {
+  animation: slide-to-right 0.25s ease-out both;
+}
+
+/* モーション軽減対応 */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    /* biome-ignore lint/complexity/noImportantStyles: 個別 .slide-* セレクタの specificity を上書きする必要がある */
+    animation: none !important;
+  }
+}

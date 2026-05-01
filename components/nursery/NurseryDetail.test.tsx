@@ -19,13 +19,7 @@ describe("NurseryDetail", () => {
   });
 
   it("園名・見学日・メモが表示される", () => {
-    render(
-      <NurseryDetail
-        nursery={mockNursery}
-        onUpdate={vi.fn()}
-        onVisitTipsClick={vi.fn()}
-      />,
-    );
+    render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
     expect(screen.getByTestId("nursery-name")).toHaveTextContent(
       "さくら保育園",
     );
@@ -37,7 +31,6 @@ describe("NurseryDetail", () => {
     render(
       <NurseryDetail
         nursery={{ ...mockNursery, memo: "" }}
-        onUpdate={vi.fn()}
         onVisitTipsClick={vi.fn()}
       />,
     );
@@ -46,84 +39,22 @@ describe("NurseryDetail", () => {
     ).toBeInTheDocument();
   });
 
-  it("園名を編集できる", async () => {
-    const user = userEvent.setup();
-    const onUpdate = vi.fn();
-    render(
-      <NurseryDetail
-        nursery={mockNursery}
-        onUpdate={onUpdate}
-        onVisitTipsClick={vi.fn()}
-      />,
-    );
-
-    await user.click(screen.getByTestId("edit-name-button"));
-    const input = screen.getByTestId("edit-name-input");
-    await user.clear(input);
-    await user.type(input, "ひまわり保育園");
-    await user.click(screen.getByTestId("save-name-button"));
-
-    expect(onUpdate).toHaveBeenCalledWith({ name: "ひまわり保育園" });
+  it("園名行にchevronとリンクが表示される", () => {
+    render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
+    const nameLink = screen.getByTestId("edit-name-link");
+    expect(nameLink).toHaveAttribute("href", "/nursery/test-1/edit/name");
   });
 
-  it("園名を空にするとエラーが表示される", async () => {
-    const user = userEvent.setup();
-    render(
-      <NurseryDetail
-        nursery={mockNursery}
-        onUpdate={vi.fn()}
-        onVisitTipsClick={vi.fn()}
-      />,
-    );
-
-    await user.click(screen.getByTestId("edit-name-button"));
-    const input = screen.getByTestId("edit-name-input");
-    await user.clear(input);
-    await user.click(screen.getByTestId("save-name-button"));
-
-    expect(screen.getByTestId("name-error")).toHaveTextContent(
-      "園名を入力してください",
-    );
+  it("見学日行にchevronとリンクが表示される", () => {
+    render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
+    const dateLink = screen.getByTestId("edit-date-link");
+    expect(dateLink).toHaveAttribute("href", "/nursery/test-1/edit/visit-date");
   });
 
-  it("見学日を編集できる", async () => {
-    const user = userEvent.setup();
-    const onUpdate = vi.fn();
-    render(
-      <NurseryDetail
-        nursery={mockNursery}
-        onUpdate={onUpdate}
-        onVisitTipsClick={vi.fn()}
-      />,
-    );
-
-    await user.click(screen.getByTestId("edit-date-button"));
-    const input = screen.getByTestId("edit-date-input");
-    await user.clear(input);
-    await user.type(input, "2026-05-01");
-    await user.click(screen.getByTestId("save-date-button"));
-
-    expect(onUpdate).toHaveBeenCalledWith({ visitDate: "2026-05-01" });
-  });
-
-  it("メモを編集できる", async () => {
-    const user = userEvent.setup();
-    const onUpdate = vi.fn();
-    render(
-      <NurseryDetail
-        nursery={mockNursery}
-        onUpdate={onUpdate}
-        onVisitTipsClick={vi.fn()}
-      />,
-    );
-
-    await user.click(screen.getByTestId("edit-memo-button"));
-    const textarea = screen.getByTestId("edit-memo-textarea");
-    await user.clear(textarea);
-    await user.type(textarea, "先生が優しい");
-    await user.click(screen.getByTestId("save-memo-button"));
-
-    expect(onUpdate).toHaveBeenCalledWith({ memo: "先生が優しい" });
+  it("メモ行にchevronとリンクが表示される", () => {
+    render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
+    const memoLink = screen.getByTestId("edit-memo-link");
+    expect(memoLink).toHaveAttribute("href", "/nursery/test-1/edit/memo");
   });
 
   it("見学のコツリンクをクリックするとonVisitTipsClickが呼ばれる", async () => {
@@ -132,12 +63,21 @@ describe("NurseryDetail", () => {
     render(
       <NurseryDetail
         nursery={mockNursery}
-        onUpdate={vi.fn()}
         onVisitTipsClick={onVisitTipsClick}
       />,
     );
 
     await user.click(screen.getByTestId("visit-tips-link"));
     expect(onVisitTipsClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("見学日がnullの場合「未定」が表示される", () => {
+    render(
+      <NurseryDetail
+        nursery={{ ...mockNursery, visitDate: null }}
+        onVisitTipsClick={vi.fn()}
+      />,
+    );
+    expect(screen.getByTestId("visit-date")).toHaveTextContent("未定");
   });
 });

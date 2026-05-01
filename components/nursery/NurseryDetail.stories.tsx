@@ -8,7 +8,6 @@ const meta = {
     layout: "padded",
   },
   args: {
-    onUpdate: () => {},
     onVisitTipsClick: () => {},
   },
 } satisfies Meta<typeof NurseryDetail>;

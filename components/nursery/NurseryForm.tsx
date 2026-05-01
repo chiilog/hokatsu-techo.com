@@ -4,14 +4,19 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { getTodayISO } from "@/lib/formatDate";
+import { cn } from "@/lib/utils";
 
 interface NurseryFormProps {
   onAdd: (name: string, visitDate: string | null) => void;
 }
 
+type VisitDateOption = "today" | "later";
+
 export function NurseryForm({ onAdd }: NurseryFormProps) {
   const [name, setName] = useState("");
-  const [visitDate, setVisitDate] = useState("");
+  const [visitDateOption, setVisitDateOption] =
+    useState<VisitDateOption>("later");
 
   const isValid = name.trim().length > 0;
 
@@ -19,7 +24,8 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
     e.preventDefault();
     if (!isValid) return;
 
-    onAdd(name, visitDate || null);
+    const visitDate = visitDateOption === "today" ? getTodayISO() : null;
+    onAdd(name, visitDate);
   };
 
   return (
@@ -41,17 +47,35 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="visit-date">見学日（任意）</Label>
-        <Input
-          id="visit-date"
-          type="date"
-          value={visitDate}
-          onChange={(e) => setVisitDate(e.target.value)}
-          data-testid="visit-date-input"
-        />
-        <p className="text-muted-foreground text-xs">
-          未入力の場合は「未定」になります
-        </p>
+        <Label>見学日</Label>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => setVisitDateOption("today")}
+            className={cn(
+              "rounded-xl border-2 px-4 py-3 text-center text-sm font-medium transition-colors",
+              visitDateOption === "today"
+                ? "border-primary bg-primary/5 text-primary"
+                : "border-border text-muted-foreground hover:border-primary/50",
+            )}
+            data-testid="visit-date-today"
+          >
+            今日
+          </button>
+          <button
+            type="button"
+            onClick={() => setVisitDateOption("later")}
+            className={cn(
+              "rounded-xl border-2 px-4 py-3 text-center text-sm font-medium transition-colors",
+              visitDateOption === "later"
+                ? "border-primary bg-primary/5 text-primary"
+                : "border-border text-muted-foreground hover:border-primary/50",
+            )}
+            data-testid="visit-date-later"
+          >
+            あとで設定する
+          </button>
+        </div>
       </div>
 
       <Button
