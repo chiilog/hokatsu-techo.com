@@ -29,8 +29,14 @@ describe("NurseryForm", () => {
 
   it("デフォルトは「あとで設定する」が選択されている", () => {
     render(<NurseryForm onAdd={vi.fn()} />);
-    const laterButton = screen.getByTestId("visit-date-later");
-    expect(laterButton.className).toContain("border-primary");
+    expect(screen.getByTestId("visit-date-later")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByTestId("visit-date-today")).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
   });
 
   it("園名のみで追加するとnullの見学日でonAddが呼ばれる", async () => {

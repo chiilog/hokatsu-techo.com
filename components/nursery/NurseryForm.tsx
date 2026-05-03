@@ -52,6 +52,7 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
           <button
             type="button"
             onClick={() => setVisitDateOption("today")}
+            aria-pressed={visitDateOption === "today"}
             className={cn(
               "rounded-xl border-2 px-4 py-3 text-center text-sm font-medium transition-colors",
               visitDateOption === "today"
@@ -65,6 +66,7 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
           <button
             type="button"
             onClick={() => setVisitDateOption("later")}
+            aria-pressed={visitDateOption === "later"}
             className={cn(
               "rounded-xl border-2 px-4 py-3 text-center text-sm font-medium transition-colors",
               visitDateOption === "later"
