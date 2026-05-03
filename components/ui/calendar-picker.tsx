@@ -3,7 +3,12 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { formatDateJP, getTodayISO, toISODateString } from "@/lib/formatDate";
+import {
+  formatDateJP,
+  getTodayISO,
+  parseISODate,
+  toISODateString,
+} from "@/lib/formatDate";
 import { cn } from "@/lib/utils";
 
 interface CalendarPickerProps {
@@ -26,10 +31,10 @@ export function CalendarPicker({
   onSelect,
 }: CalendarPickerProps) {
   const [viewYear, setViewYear] = useState(() =>
-    (selectedDate ? new Date(selectedDate) : new Date()).getFullYear(),
+    (selectedDate ? parseISODate(selectedDate) : new Date()).getFullYear(),
   );
   const [viewMonth, setViewMonth] = useState(() =>
-    (selectedDate ? new Date(selectedDate) : new Date()).getMonth(),
+    (selectedDate ? parseISODate(selectedDate) : new Date()).getMonth(),
   );
 
   const today = getTodayISO();
@@ -132,7 +137,7 @@ export function CalendarPicker({
                 !isSelected && isToday && "border border-primary text-primary",
                 !isSelected && !isToday && "hover:bg-accent active:bg-accent",
               )}
-              aria-label={`${viewMonth + 1}月${day}日`}
+              aria-label={`${viewYear}年${viewMonth + 1}月${day}日`}
               aria-pressed={isSelected}
               data-testid={`day-${day}`}
             >
