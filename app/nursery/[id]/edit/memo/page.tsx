@@ -47,11 +47,7 @@ export default function EditMemoPage() {
   const navigateBack = () => {
     startTransition(() => {
       addTransitionType(TRANSITION_TYPE.NAV_BACK);
-      if (window.history.length > 1) {
-        router.back();
-      } else {
-        router.replace(`/nursery/${id}`);
-      }
+      router.replace(`/nursery/${id}`);
     });
   };
 
