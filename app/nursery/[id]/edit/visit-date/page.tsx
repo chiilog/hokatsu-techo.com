@@ -48,9 +48,9 @@ export default function EditVisitDatePage() {
 
   const handleSelect = (date: string | null) => {
     if (date === selectedDate) return;
-    setSelectedDate(date);
     try {
       updateNursery(id, { visitDate: date });
+      setSelectedDate(date);
       showToast(date ? "見学日を保存しました" : "未定に変更しました");
     } catch {
       showToast("保存できませんでした。もう一度お試しください", {
