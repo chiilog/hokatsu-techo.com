@@ -38,7 +38,11 @@ export default function EditVisitDatePage() {
   const navigateBack = () => {
     startTransition(() => {
       addTransitionType(TRANSITION_TYPE.NAV_BACK);
-      router.back();
+      if (window.history.length > 1) {
+        router.back();
+      } else {
+        router.replace(`/nursery/${id}`);
+      }
     });
   };
 
