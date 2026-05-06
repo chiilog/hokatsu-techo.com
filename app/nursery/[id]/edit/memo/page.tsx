@@ -2,21 +2,14 @@
 
 import { ChevronLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  addTransitionType,
-  startTransition,
-  useEffect,
-  useRef,
-  useState,
-  ViewTransition,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { DiscardChangesDialog } from "@/components/nursery/DiscardChangesDialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ToastContainer } from "@/components/ui/toast";
 import { useHydrated } from "@/hooks/useHydrated";
 import { useToast } from "@/hooks/useToast";
-import { SLIDE_TRANSITION_PROPS, TRANSITION_TYPE } from "@/lib/viewTransition";
+import { startSlideTransition } from "@/lib/viewTransition";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 export default function EditMemoPage() {
@@ -45,8 +38,7 @@ export default function EditMemoPage() {
   const hasChanges = initialized && memo !== (nursery?.memo ?? "");
 
   const navigateBack = () => {
-    startTransition(() => {
-      addTransitionType(TRANSITION_TYPE.NAV_BACK);
+    startSlideTransition("back", () => {
       router.replace(`/nursery/${id}`);
     });
   };
@@ -125,20 +117,18 @@ export default function EditMemoPage() {
         </div>
       </header>
 
-      <ViewTransition {...SLIDE_TRANSITION_PROPS}>
-        <main className="mx-auto max-w-lg px-4 py-6">
-          <h1 className="mb-6 font-bold text-lg">メモを編集</h1>
-          <Textarea
-            ref={textareaRef}
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-            placeholder="気づいたことを自由に書けます"
-            rows={12}
-            className="min-h-[50vh] resize-none"
-            data-testid="edit-memo-textarea"
-          />
-        </main>
-      </ViewTransition>
+      <main className="mx-auto max-w-lg px-4 py-6">
+        <h1 className="mb-6 font-bold text-lg">メモを編集</h1>
+        <Textarea
+          ref={textareaRef}
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+          placeholder="気づいたことを自由に書けます"
+          rows={12}
+          className="min-h-[50vh] resize-none"
+          data-testid="edit-memo-textarea"
+        />
+      </main>
 
       <DiscardChangesDialog
         open={showDiscardDialog}

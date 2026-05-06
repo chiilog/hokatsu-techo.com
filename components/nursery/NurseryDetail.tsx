@@ -1,10 +1,9 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { SlideLink } from "@/components/common/SlideLink";
 import { Button } from "@/components/ui/button";
 import { formatVisitDate } from "@/lib/formatDate";
-import { TRANSITION_TYPE } from "@/lib/viewTransition";
 import type { Nursery } from "@/types/nursery";
 
 interface NurseryDetailProps {
@@ -21,9 +20,9 @@ export function NurseryDetail({
   return (
     <div className="space-y-6" data-testid="nursery-detail">
       <div className="overflow-hidden rounded-xl border bg-card">
-        <Link
+        <SlideLink
           href={`/nursery/${nursery.id}/edit/name`}
-          transitionTypes={[TRANSITION_TYPE.NAV_FORWARD]}
+          direction="forward"
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
           data-testid="edit-name-link"
           aria-label={`園名を編集: ${nursery.name}`}
@@ -38,13 +37,13 @@ export function NurseryDetail({
             className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
             aria-hidden="true"
           />
-        </Link>
+        </SlideLink>
 
         <div className="mx-4 border-t" />
 
-        <Link
+        <SlideLink
           href={`/nursery/${nursery.id}/edit/visit-date`}
-          transitionTypes={[TRANSITION_TYPE.NAV_FORWARD]}
+          direction="forward"
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
           data-testid="edit-date-link"
           aria-label={`見学日を編集: ${formattedDate}`}
@@ -59,13 +58,13 @@ export function NurseryDetail({
             className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
             aria-hidden="true"
           />
-        </Link>
+        </SlideLink>
 
         <div className="mx-4 border-t" />
 
-        <Link
+        <SlideLink
           href={`/nursery/${nursery.id}/edit/memo`}
-          transitionTypes={[TRANSITION_TYPE.NAV_FORWARD]}
+          direction="forward"
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
           data-testid="edit-memo-link"
           aria-label={
@@ -94,7 +93,7 @@ export function NurseryDetail({
             className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
             aria-hidden="true"
           />
-        </Link>
+        </SlideLink>
       </div>
 
       <div>

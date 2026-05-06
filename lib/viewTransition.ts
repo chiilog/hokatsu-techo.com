@@ -1,18 +1,22 @@
-export const TRANSITION_TYPE = {
-  NAV_FORWARD: "nav-forward",
-  NAV_BACK: "nav-back",
-} as const;
+export type Direction = "forward" | "back";
 
-export const SLIDE_TRANSITION_PROPS = {
-  enter: {
-    [TRANSITION_TYPE.NAV_FORWARD]: "slide-forward",
-    [TRANSITION_TYPE.NAV_BACK]: "slide-back",
-    default: "none",
-  },
-  exit: {
-    [TRANSITION_TYPE.NAV_FORWARD]: "slide-forward",
-    [TRANSITION_TYPE.NAV_BACK]: "slide-back",
-    default: "none",
-  },
-  default: "none",
-} as const;
+export function startSlideTransition(
+  direction: Direction,
+  update: () => void,
+): void {
+  if (typeof document === "undefined" || !("startViewTransition" in document)) {
+    update();
+    return;
+  }
+  const root = document.documentElement;
+  root.dataset.vtDirection = direction;
+  const transition = document.startViewTransition(update);
+  transition.finished
+    .catch(() => {})
+    .finally(() => {
+      // 後続クリックで上書きされた direction は触らない
+      if (root.dataset.vtDirection === direction) {
+        delete root.dataset.vtDirection;
+      }
+    });
+}

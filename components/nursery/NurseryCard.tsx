@@ -1,6 +1,5 @@
-import Link from "next/link";
+import { SlideLink } from "@/components/common/SlideLink";
 import { formatVisitDate } from "@/lib/formatDate";
-import { TRANSITION_TYPE } from "@/lib/viewTransition";
 import type { Nursery } from "@/types/nursery";
 
 interface NurseryCardProps {
@@ -11,9 +10,9 @@ export function NurseryCard({ nursery }: NurseryCardProps) {
   const formattedDate = formatVisitDate(nursery.visitDate);
 
   return (
-    <Link
+    <SlideLink
       href={`/nursery/${nursery.id}`}
-      transitionTypes={[TRANSITION_TYPE.NAV_FORWARD]}
+      direction="forward"
       className="block rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50"
       data-testid={`nursery-card-${nursery.id}`}
     >
@@ -28,6 +27,6 @@ export function NurseryCard({ nursery }: NurseryCardProps) {
           {nursery.memo}
         </p>
       )}
-    </Link>
+    </SlideLink>
   );
 }

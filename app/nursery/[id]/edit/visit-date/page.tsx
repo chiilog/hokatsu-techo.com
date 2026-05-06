@@ -2,19 +2,13 @@
 
 import { ChevronLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  addTransitionType,
-  startTransition,
-  useEffect,
-  useState,
-  ViewTransition,
-} from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CalendarPicker } from "@/components/ui/calendar-picker";
 import { ToastContainer } from "@/components/ui/toast";
 import { useHydrated } from "@/hooks/useHydrated";
 import { useToast } from "@/hooks/useToast";
-import { SLIDE_TRANSITION_PROPS, TRANSITION_TYPE } from "@/lib/viewTransition";
+import { startSlideTransition } from "@/lib/viewTransition";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 export default function EditVisitDatePage() {
@@ -36,8 +30,7 @@ export default function EditVisitDatePage() {
   }, [hydrated, nursery]);
 
   const navigateBack = () => {
-    startTransition(() => {
-      addTransitionType(TRANSITION_TYPE.NAV_BACK);
+    startSlideTransition("back", () => {
       router.replace(`/nursery/${id}`);
     });
   };
@@ -97,12 +90,10 @@ export default function EditVisitDatePage() {
         </div>
       </header>
 
-      <ViewTransition {...SLIDE_TRANSITION_PROPS}>
-        <main className="mx-auto max-w-lg px-4 py-6">
-          <h1 className="mb-6 font-bold text-lg">見学日を選択</h1>
-          <CalendarPicker selectedDate={selectedDate} onSelect={handleSelect} />
-        </main>
-      </ViewTransition>
+      <main className="mx-auto max-w-lg px-4 py-6">
+        <h1 className="mb-6 font-bold text-lg">見学日を選択</h1>
+        <CalendarPicker selectedDate={selectedDate} onSelect={handleSelect} />
+      </main>
 
       <ToastContainer toasts={toasts} onRemove={removeToast} />
     </>

@@ -2,21 +2,14 @@
 
 import { ChevronLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  addTransitionType,
-  startTransition,
-  useEffect,
-  useRef,
-  useState,
-  ViewTransition,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { DiscardChangesDialog } from "@/components/nursery/DiscardChangesDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ToastContainer } from "@/components/ui/toast";
 import { useHydrated } from "@/hooks/useHydrated";
 import { useToast } from "@/hooks/useToast";
-import { SLIDE_TRANSITION_PROPS, TRANSITION_TYPE } from "@/lib/viewTransition";
+import { startSlideTransition } from "@/lib/viewTransition";
 import { useNurseryStore } from "@/stores/nurseryStore";
 
 export default function EditNamePage() {
@@ -46,8 +39,7 @@ export default function EditNamePage() {
   const isValid = name.trim().length > 0;
 
   const navigateBack = () => {
-    startTransition(() => {
-      addTransitionType(TRANSITION_TYPE.NAV_BACK);
+    startSlideTransition("back", () => {
       router.replace(`/nursery/${id}`);
     });
   };
@@ -127,26 +119,21 @@ export default function EditNamePage() {
         </div>
       </header>
 
-      <ViewTransition {...SLIDE_TRANSITION_PROPS}>
-        <main className="mx-auto max-w-lg px-4 py-6">
-          <h1 className="mb-6 font-bold text-lg">園名を編集</h1>
-          <Input
-            ref={inputRef}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="園名を入力"
-            data-testid="edit-name-input"
-          />
-          {!isValid && name.length > 0 && (
-            <p
-              className="mt-2 text-destructive text-sm"
-              data-testid="name-error"
-            >
-              園名を入力してください
-            </p>
-          )}
-        </main>
-      </ViewTransition>
+      <main className="mx-auto max-w-lg px-4 py-6">
+        <h1 className="mb-6 font-bold text-lg">園名を編集</h1>
+        <Input
+          ref={inputRef}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="園名を入力"
+          data-testid="edit-name-input"
+        />
+        {!isValid && name.length > 0 && (
+          <p className="mt-2 text-destructive text-sm" data-testid="name-error">
+            園名を入力してください
+          </p>
+        )}
+      </main>
 
       <DiscardChangesDialog
         open={showDiscardDialog}

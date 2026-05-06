@@ -123,18 +123,18 @@
 }
 
 /* 進むアニメーション */
-::view-transition-new(.slide-forward) {
+:root[data-vt-direction="forward"]::view-transition-new(root) {
   animation: slide-from-right 0.25s ease-out both;
 }
-::view-transition-old(.slide-forward) {
+:root[data-vt-direction="forward"]::view-transition-old(root) {
   animation: slide-to-left 0.25s ease-out both;
 }
 
 /* 戻るアニメーション */
-::view-transition-new(.slide-back) {
+:root[data-vt-direction="back"]::view-transition-new(root) {
   animation: slide-from-left 0.25s ease-out both;
 }
-::view-transition-old(.slide-back) {
+:root[data-vt-direction="back"]::view-transition-old(root) {
   animation: slide-to-right 0.25s ease-out both;
 }
 
