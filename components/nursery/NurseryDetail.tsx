@@ -26,6 +26,7 @@ export function NurseryDetail({
           transitionTypes={[TRANSITION_TYPE.NAV_FORWARD]}
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
           data-testid="edit-name-link"
+          aria-label={`園名を編集: ${nursery.name}`}
         >
           <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground">園名</p>
@@ -46,6 +47,7 @@ export function NurseryDetail({
           transitionTypes={[TRANSITION_TYPE.NAV_FORWARD]}
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
           data-testid="edit-date-link"
+          aria-label={`見学日を編集: ${formattedDate}`}
         >
           <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground">見学日</p>
@@ -66,6 +68,9 @@ export function NurseryDetail({
           transitionTypes={[TRANSITION_TYPE.NAV_FORWARD]}
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
           data-testid="edit-memo-link"
+          aria-label={
+            nursery.memo ? `メモを編集: ${nursery.memo}` : "メモを追加"
+          }
         >
           <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground">メモ</p>
