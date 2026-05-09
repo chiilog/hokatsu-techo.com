@@ -21,8 +21,9 @@ describe("VisitTipsDialog", () => {
     const onClose = vi.fn();
     render(<VisitTipsDialog open={true} onClose={onClose} />);
 
-    const closeButtons = screen.getAllByRole("button", { name: "閉じる" });
-    await user.click(closeButtons[closeButtons.length - 1]);
+    await user.click(
+      screen.getByRole("button", { name: "見学のコツを閉じる" }),
+    );
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 

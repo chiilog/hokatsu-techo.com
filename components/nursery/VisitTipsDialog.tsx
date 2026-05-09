@@ -56,7 +56,11 @@ export function VisitTipsDialog({ open, onClose }: VisitTipsDialogProps) {
         </div>
 
         <DialogFooter>
-          <Button onClick={onClose} className="w-full">
+          <Button
+            onClick={onClose}
+            className="w-full"
+            aria-label="見学のコツを閉じる"
+          >
             閉じる
           </Button>
         </DialogFooter>
