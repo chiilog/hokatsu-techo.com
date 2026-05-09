@@ -133,7 +133,7 @@ export function CalendarPicker({
                 !isSelected && isToday && "border border-primary text-primary",
                 !isSelected && !isToday && "hover:bg-accent active:bg-accent",
               )}
-              aria-label={`${viewYear}年${viewMonth + 1}月${day}日`}
+              aria-label={`${monthLabel}${day}日`}
               aria-pressed={isSelected}
             >
               {day}
