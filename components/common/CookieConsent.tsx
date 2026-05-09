@@ -27,7 +27,6 @@ export function CookieConsent() {
           role="dialog"
           aria-label="Cookie使用の同意"
           className="fixed inset-x-0 bottom-0 z-50 border-t bg-background p-4 shadow-lg"
-          data-testid="cookie-consent-banner"
         >
           <div className="mx-auto max-w-lg">
             <p className="mb-3 text-sm">
@@ -36,19 +35,10 @@ export function CookieConsent() {
               Clarity）にのみ使用し、入力された園の情報は送信しません。
             </p>
             <div className="flex gap-2">
-              <Button
-                size="sm"
-                onClick={accept}
-                data-testid="cookie-accept-button"
-              >
+              <Button size="sm" onClick={accept}>
                 同意する
               </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={decline}
-                data-testid="cookie-decline-button"
-              >
+              <Button size="sm" variant="outline" onClick={decline}>
                 同意しない
               </Button>
             </div>
