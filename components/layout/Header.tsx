@@ -17,7 +17,6 @@ export function Header({ onHelpClick }: HeaderProps) {
           size="icon"
           onClick={onHelpClick}
           aria-label="ヘルプ"
-          data-testid="header-help-button"
         >
           <CircleHelp className="h-5 w-5" />
         </Button>

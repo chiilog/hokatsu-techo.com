@@ -103,7 +103,6 @@ export default function EditNamePage() {
             size="sm"
             onClick={handleBack}
             className="gap-1 px-2"
-            data-testid="back-button"
           >
             <ChevronLeft className="h-5 w-5" />
             戻る
@@ -112,7 +111,6 @@ export default function EditNamePage() {
             size="sm"
             onClick={handleSave}
             disabled={!isValid || !hasChanges}
-            data-testid="save-button"
           >
             完了
           </Button>
@@ -126,10 +124,9 @@ export default function EditNamePage() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="園名を入力"
-          data-testid="edit-name-input"
         />
         {!isValid && name.length > 0 && (
-          <p className="mt-2 text-destructive text-sm" data-testid="name-error">
+          <p className="mt-2 text-destructive text-sm">
             園名を入力してください
           </p>
         )}
