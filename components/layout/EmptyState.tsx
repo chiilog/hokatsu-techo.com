@@ -14,10 +14,7 @@ export function EmptyState({
   showAddButton = false,
 }: EmptyStateProps) {
   return (
-    <div
-      className="flex flex-col items-center justify-center py-12 text-center"
-      data-testid="empty-state"
-    >
+    <div className="flex flex-col items-center justify-center py-12 text-center">
       <p className="font-medium text-lg text-muted-foreground">{message}</p>
       {description && (
         <p className="mt-2 text-muted-foreground text-sm">{description}</p>

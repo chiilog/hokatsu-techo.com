@@ -18,7 +18,7 @@ export function NurseryList({ nurseries }: NurseryListProps) {
   }
 
   return (
-    <ul className="space-y-3" data-testid="nursery-list">
+    <ul className="space-y-3">
       {nurseries.map((nursery) => (
         <li key={nursery.id}>
           <NurseryCard nursery={nursery} />
