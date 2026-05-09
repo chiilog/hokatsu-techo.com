@@ -33,7 +33,7 @@ describe("DiscardChangesDialog", () => {
       />,
     );
 
-    await user.click(screen.getByTestId("discard-confirm-button"));
+    await user.click(screen.getByRole("button", { name: "破棄" }));
     expect(onDiscard).toHaveBeenCalledTimes(1);
   });
 
@@ -48,7 +48,7 @@ describe("DiscardChangesDialog", () => {
       />,
     );
 
-    await user.click(screen.getByTestId("discard-cancel-button"));
+    await user.click(screen.getByRole("button", { name: "編集を続ける" }));
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 
