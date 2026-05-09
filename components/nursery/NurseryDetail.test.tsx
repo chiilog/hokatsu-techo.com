@@ -20,10 +20,8 @@ describe("NurseryDetail", () => {
 
   it("園名・見学日・メモが表示される", () => {
     render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
-    expect(screen.getByTestId("nursery-name")).toHaveTextContent(
-      "さくら保育園",
-    );
-    expect(screen.getByTestId("visit-date")).toHaveTextContent("2026/4/15");
+    expect(screen.getByText("さくら保育園")).toBeInTheDocument();
+    expect(screen.getByText("2026/4/15")).toBeInTheDocument();
     expect(screen.getByText("園庭が広い")).toBeInTheDocument();
   });
 
@@ -39,21 +37,27 @@ describe("NurseryDetail", () => {
     ).toBeInTheDocument();
   });
 
-  it("園名行にchevronとリンクが表示される", () => {
+  it("園名行のリンクが正しい href を持つ", () => {
     render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
-    const nameLink = screen.getByTestId("edit-name-link");
+    const nameLink = screen.getByRole("link", {
+      name: "園名を編集: さくら保育園",
+    });
     expect(nameLink).toHaveAttribute("href", "/nursery/test-1/edit/name");
   });
 
-  it("見学日行にchevronとリンクが表示される", () => {
+  it("見学日行のリンクが正しい href を持つ", () => {
     render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
-    const dateLink = screen.getByTestId("edit-date-link");
+    const dateLink = screen.getByRole("link", {
+      name: "見学日を編集: 2026/4/15",
+    });
     expect(dateLink).toHaveAttribute("href", "/nursery/test-1/edit/visit-date");
   });
 
-  it("メモ行にchevronとリンクが表示される", () => {
+  it("メモ行のリンクが正しい href を持つ", () => {
     render(<NurseryDetail nursery={mockNursery} onVisitTipsClick={vi.fn()} />);
-    const memoLink = screen.getByTestId("edit-memo-link");
+    const memoLink = screen.getByRole("link", {
+      name: "メモを編集: 園庭が広い",
+    });
     expect(memoLink).toHaveAttribute("href", "/nursery/test-1/edit/memo");
   });
 
@@ -67,7 +71,7 @@ describe("NurseryDetail", () => {
       />,
     );
 
-    await user.click(screen.getByTestId("visit-tips-link"));
+    await user.click(screen.getByRole("button", { name: "見学のコツを見る" }));
     expect(onVisitTipsClick).toHaveBeenCalledTimes(1);
   });
 
@@ -78,6 +82,6 @@ describe("NurseryDetail", () => {
         onVisitTipsClick={vi.fn()}
       />,
     );
-    expect(screen.getByTestId("visit-date")).toHaveTextContent("未定");
+    expect(screen.getByText("未定")).toBeInTheDocument();
   });
 });
