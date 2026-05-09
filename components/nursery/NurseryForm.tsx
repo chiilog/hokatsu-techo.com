@@ -29,11 +29,7 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6"
-      data-testid="nursery-form"
-    >
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <Label htmlFor="nursery-name">園名</Label>
         <Input
@@ -42,7 +38,6 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
           placeholder="例：さくら保育園"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          data-testid="nursery-name-input"
         />
       </div>
 
@@ -59,7 +54,6 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
                 ? "border-primary bg-primary/5 text-primary"
                 : "border-border text-muted-foreground hover:border-primary/50",
             )}
-            data-testid="visit-date-today"
           >
             今日
           </button>
@@ -73,19 +67,13 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
                 ? "border-primary bg-primary/5 text-primary"
                 : "border-border text-muted-foreground hover:border-primary/50",
             )}
-            data-testid="visit-date-later"
           >
             あとで設定する
           </button>
         </div>
       </div>
 
-      <Button
-        type="submit"
-        className="w-full"
-        disabled={!isValid}
-        data-testid="add-nursery-button"
-      >
+      <Button type="submit" className="w-full" disabled={!isValid}>
         追加する
       </Button>
     </form>
