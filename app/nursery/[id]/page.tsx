@@ -1,9 +1,10 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { SlideLink } from "@/components/common/SlideLink";
 import { DeleteNurseryDialog } from "@/components/nursery/DeleteNurseryDialog";
 import { NurseryDetail } from "@/components/nursery/NurseryDetail";
 import { VisitTipsDialog } from "@/components/nursery/VisitTipsDialog";
@@ -17,7 +18,6 @@ export default function NurseryDetailPage() {
   const id = params.id;
 
   const nursery = useNurseryStore((s) => s.nurseries.find((n) => n.id === id));
-  const updateNursery = useNurseryStore((s) => s.updateNursery);
   const deleteNursery = useNurseryStore((s) => s.deleteNursery);
   const hasSeenVisitTips = useNurseryStore((s) => s.hasSeenVisitTips);
   const setVisitTipsSeen = useNurseryStore((s) => s.setVisitTipsSeen);
@@ -43,9 +43,10 @@ export default function NurseryDetailPage() {
       <>
         <header className="sticky top-0 z-10 border-b bg-background">
           <div className="flex items-center gap-2 px-4 py-3">
-            <Button variant="ghost" size="icon" asChild>
+            <Button variant="ghost" size="sm" asChild className="gap-1 px-2">
               <Link href="/" aria-label="戻る">
-                <ArrowLeft className="h-5 w-5" />
+                <ChevronLeft className="h-5 w-5" />
+                戻る
               </Link>
             </Button>
             <h1 className="font-bold text-lg">園が見つかりません</h1>
@@ -64,10 +65,11 @@ export default function NurseryDetailPage() {
     <>
       <header className="sticky top-0 z-10 border-b bg-background">
         <div className="flex items-center gap-2 px-4 py-3">
-          <Button variant="ghost" size="icon" asChild>
-            <Link href="/" aria-label="戻る">
-              <ArrowLeft className="h-5 w-5" />
-            </Link>
+          <Button variant="ghost" size="sm" asChild className="gap-1 px-2">
+            <SlideLink href="/" direction="back" aria-label="戻る">
+              <ChevronLeft className="h-5 w-5" />
+              戻る
+            </SlideLink>
           </Button>
           <h1 className="font-bold text-lg">園の詳細</h1>
         </div>
@@ -76,7 +78,6 @@ export default function NurseryDetailPage() {
       <main className="mx-auto max-w-lg px-4 py-6">
         <NurseryDetail
           nursery={nursery}
-          onUpdate={(updates) => updateNursery(id, updates)}
           onVisitTipsClick={() => setShowVisitTipsManual(true)}
         />
 

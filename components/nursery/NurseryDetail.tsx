@@ -1,231 +1,101 @@
 "use client";
 
-import { Pencil } from "lucide-react";
-import { useState } from "react";
+import { ChevronRight } from "lucide-react";
+import { SlideLink } from "@/components/common/SlideLink";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { formatVisitDate } from "@/lib/formatDate";
 import type { Nursery } from "@/types/nursery";
 
-type EditableField = "name" | "visitDate" | "memo";
-
 interface NurseryDetailProps {
   nursery: Nursery;
-  onUpdate: (updates: Partial<Omit<Nursery, "id" | "createdAt">>) => void;
   onVisitTipsClick: () => void;
 }
 
 export function NurseryDetail({
   nursery,
-  onUpdate,
   onVisitTipsClick,
 }: NurseryDetailProps) {
-  const [editingField, setEditingField] = useState<EditableField | null>(null);
-  const [editName, setEditName] = useState(nursery.name);
-  const [editDate, setEditDate] = useState(nursery.visitDate ?? "");
-  const [editMemo, setEditMemo] = useState(nursery.memo);
-  const [nameError, setNameError] = useState("");
-
-  const startEdit = (field: EditableField) => {
-    setEditingField(field);
-    setEditName(nursery.name);
-    setEditDate(nursery.visitDate ?? "");
-    setEditMemo(nursery.memo);
-    setNameError("");
-  };
-
-  const saveName = () => {
-    if (editName.trim().length === 0) {
-      setNameError("園名を入力してください");
-      return;
-    }
-    onUpdate({ name: editName });
-    setEditingField(null);
-  };
-
-  const saveDate = () => {
-    onUpdate({ visitDate: editDate || null });
-    setEditingField(null);
-  };
-
-  const saveMemo = () => {
-    onUpdate({ memo: editMemo });
-    setEditingField(null);
-  };
-
-  const cancel = () => {
-    setEditingField(null);
-    setNameError("");
-  };
-
   const formattedDate = formatVisitDate(nursery.visitDate);
 
   return (
     <div className="space-y-6" data-testid="nursery-detail">
-      {/* 園名 */}
-      <div className="space-y-2">
-        <Label htmlFor={editingField === "name" ? "edit-name" : undefined}>
-          園名
-        </Label>
-        {editingField === "name" ? (
-          <div className="space-y-2">
-            <Input
-              id="edit-name"
-              value={editName}
-              onChange={(e) => {
-                setEditName(e.target.value);
-                setNameError("");
-              }}
-              aria-invalid={nameError ? true : undefined}
-              aria-describedby={nameError ? "name-error" : undefined}
-              data-testid="edit-name-input"
-            />
-            {nameError && (
-              <p
-                id="name-error"
-                className="text-destructive text-sm"
-                data-testid="name-error"
-              >
-                {nameError}
-              </p>
-            )}
-            <div className="flex gap-2">
-              <Button
-                size="sm"
-                onClick={saveName}
-                data-testid="save-name-button"
-              >
-                保存
-              </Button>
-              <Button size="sm" variant="outline" onClick={cancel}>
-                キャンセル
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="flex items-center justify-between">
-            <p className="font-medium text-lg" data-testid="nursery-name">
+      <div className="overflow-hidden rounded-xl border bg-card">
+        <SlideLink
+          href={`/nursery/${nursery.id}/edit/name`}
+          direction="forward"
+          className="flex items-center justify-between px-4 py-3 active:bg-accent"
+          data-testid="edit-name-link"
+          aria-label={`園名を編集: ${nursery.name}`}
+        >
+          <div className="min-w-0 flex-1">
+            <p className="text-xs text-muted-foreground">園名</p>
+            <p className="truncate font-medium" data-testid="nursery-name">
               {nursery.name}
             </p>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => startEdit("name")}
-              aria-label="園名を編集"
-              data-testid="edit-name-button"
-            >
-              <Pencil className="mr-1 h-4 w-4" />
-              編集
-            </Button>
           </div>
-        )}
-      </div>
+          <ChevronRight
+            className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
+            aria-hidden="true"
+          />
+        </SlideLink>
 
-      {/* 見学日 */}
-      <div className="space-y-2">
-        <Label htmlFor={editingField === "visitDate" ? "edit-date" : undefined}>
-          見学日
-        </Label>
-        {editingField === "visitDate" ? (
-          <div className="space-y-2">
-            <Input
-              id="edit-date"
-              type="date"
-              value={editDate}
-              onChange={(e) => setEditDate(e.target.value)}
-              data-testid="edit-date-input"
-            />
-            <p className="text-muted-foreground text-xs">
-              空にすると「未定」になります
+        <div className="mx-4 border-t" />
+
+        <SlideLink
+          href={`/nursery/${nursery.id}/edit/visit-date`}
+          direction="forward"
+          className="flex items-center justify-between px-4 py-3 active:bg-accent"
+          data-testid="edit-date-link"
+          aria-label={`見学日を編集: ${formattedDate}`}
+        >
+          <div className="min-w-0 flex-1">
+            <p className="text-xs text-muted-foreground">見学日</p>
+            <p className="truncate" data-testid="visit-date">
+              {formattedDate}
             </p>
-            <div className="flex gap-2">
-              <Button
-                size="sm"
-                onClick={saveDate}
-                data-testid="save-date-button"
-              >
-                保存
-              </Button>
-              <Button size="sm" variant="outline" onClick={cancel}>
-                キャンセル
-              </Button>
-            </div>
           </div>
-        ) : (
-          <div className="flex items-center justify-between">
-            <p data-testid="visit-date">{formattedDate}</p>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => startEdit("visitDate")}
-              aria-label="見学日を編集"
-              data-testid="edit-date-button"
-            >
-              <Pencil className="mr-1 h-4 w-4" />
-              編集
-            </Button>
-          </div>
-        )}
-      </div>
+          <ChevronRight
+            className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
+            aria-hidden="true"
+          />
+        </SlideLink>
 
-      {/* メモ */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <Label htmlFor={editingField === "memo" ? "edit-memo" : undefined}>
-            メモ
-          </Label>
-          {editingField !== "memo" && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => startEdit("memo")}
-              aria-label="メモを編集"
-              data-testid="edit-memo-button"
-            >
-              <Pencil className="mr-1 h-4 w-4" />
-              編集
-            </Button>
-          )}
-        </div>
-        {editingField === "memo" ? (
-          <div className="space-y-2">
-            <Textarea
-              id="edit-memo"
-              value={editMemo}
-              onChange={(e) => setEditMemo(e.target.value)}
-              placeholder="気づいたことを自由に書けます"
-              rows={6}
-              data-testid="edit-memo-textarea"
-            />
-            <div className="flex gap-2">
-              <Button
-                size="sm"
-                onClick={saveMemo}
-                data-testid="save-memo-button"
-              >
-                保存
-              </Button>
-              <Button size="sm" variant="outline" onClick={cancel}>
-                キャンセル
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div data-testid="memo-display">
+        <div className="mx-4 border-t" />
+
+        <SlideLink
+          href={`/nursery/${nursery.id}/edit/memo`}
+          direction="forward"
+          className="flex items-center justify-between px-4 py-3 active:bg-accent"
+          data-testid="edit-memo-link"
+          aria-label={
+            nursery.memo ? `メモを編集: ${nursery.memo}` : "メモを追加"
+          }
+        >
+          <div className="min-w-0 flex-1">
+            <p className="text-xs text-muted-foreground">メモ</p>
             {nursery.memo ? (
-              <p className="whitespace-pre-wrap text-sm">{nursery.memo}</p>
+              <p
+                className="whitespace-pre-wrap break-words text-sm"
+                data-testid="memo-display"
+              >
+                {nursery.memo}
+              </p>
             ) : (
-              <p className="text-muted-foreground text-sm">
+              <p
+                className="text-sm text-muted-foreground"
+                data-testid="memo-display"
+              >
                 気づいたことを自由に書けます
               </p>
             )}
           </div>
-        )}
+          <ChevronRight
+            className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
+            aria-hidden="true"
+          />
+        </SlideLink>
       </div>
 
-      {/* 見学のコツリンク */}
       <div>
         <Button
           variant="link"

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SlideLink } from "@/components/common/SlideLink";
 import { formatVisitDate } from "@/lib/formatDate";
 import type { Nursery } from "@/types/nursery";
 
@@ -10,8 +10,9 @@ export function NurseryCard({ nursery }: NurseryCardProps) {
   const formattedDate = formatVisitDate(nursery.visitDate);
 
   return (
-    <Link
+    <SlideLink
       href={`/nursery/${nursery.id}`}
+      direction="forward"
       className="block rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50"
       data-testid={`nursery-card-${nursery.id}`}
     >
@@ -26,6 +27,6 @@ export function NurseryCard({ nursery }: NurseryCardProps) {
           {nursery.memo}
         </p>
       )}
-    </Link>
+    </SlideLink>
   );
 }
