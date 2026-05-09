@@ -68,8 +68,8 @@ export function CalendarPicker({
   const monthLabel = `${viewYear}年${viewMonth + 1}月`;
 
   return (
-    <div data-testid="calendar-picker">
-      <div className="mb-4 text-center" data-testid="selected-date-display">
+    <div>
+      <div className="mb-4 text-center">
         {selectedDate ? (
           <p className="font-medium text-lg">{formatDateJP(selectedDate)}</p>
         ) : (
@@ -83,19 +83,15 @@ export function CalendarPicker({
           size="icon"
           onClick={prevMonth}
           aria-label="前の月"
-          data-testid="prev-month-button"
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
-        <span className="font-medium" data-testid="month-label">
-          {monthLabel}
-        </span>
+        <span className="font-medium">{monthLabel}</span>
         <Button
           variant="ghost"
           size="icon"
           onClick={nextMonth}
           aria-label="次の月"
-          data-testid="next-month-button"
         >
           <ChevronRight className="h-5 w-5" />
         </Button>
@@ -139,7 +135,6 @@ export function CalendarPicker({
               )}
               aria-label={`${viewYear}年${viewMonth + 1}月${day}日`}
               aria-pressed={isSelected}
-              data-testid={`day-${day}`}
             >
               {day}
             </button>
@@ -152,7 +147,6 @@ export function CalendarPicker({
           variant="outline"
           className="w-full"
           onClick={() => onSelect(null)}
-          data-testid="set-undecided-button"
         >
           未定にする
         </Button>
