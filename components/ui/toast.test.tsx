@@ -20,7 +20,7 @@ describe("ToastContainer", () => {
     render(<ToastContainer toasts={toasts} onRemove={vi.fn()} />);
 
     expect(screen.getByText("保存しました")).toBeInTheDocument();
-    expect(screen.getByTestId("toast-container")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toBeInTheDocument();
   });
 
   it("エラートーストが表示される", () => {
@@ -35,8 +35,7 @@ describe("ToastContainer", () => {
   it("トーストが空の場合はコンテナは存在するがトーストは表示されない", () => {
     render(<ToastContainer toasts={[]} onRemove={vi.fn()} />);
 
-    expect(screen.getByTestId("toast-container")).toBeInTheDocument();
-    expect(screen.queryByTestId("toast-message")).not.toBeInTheDocument();
+    expect(screen.getByRole("status")).toBeEmptyDOMElement();
   });
 
   it("一定時間後にonRemoveが呼ばれる", () => {
@@ -67,8 +66,7 @@ describe("ToastContainer", () => {
   it("role=statusとaria-live=politeが常に設定されている", () => {
     render(<ToastContainer toasts={[]} onRemove={vi.fn()} />);
 
-    const container = screen.getByTestId("toast-container");
-    expect(container).toHaveAttribute("role", "status");
+    const container = screen.getByRole("status");
     expect(container).toHaveAttribute("aria-live", "polite");
   });
 });
