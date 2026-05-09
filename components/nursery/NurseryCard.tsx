@@ -14,7 +14,6 @@ export function NurseryCard({ nursery }: NurseryCardProps) {
       href={`/nursery/${nursery.id}`}
       direction="forward"
       className="block rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50"
-      data-testid={`nursery-card-${nursery.id}`}
     >
       <div className="flex items-start justify-between gap-2">
         <h2 className="font-medium text-base">{nursery.name}</h2>
