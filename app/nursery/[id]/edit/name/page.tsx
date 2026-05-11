@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { DiscardChangesDialog } from "@/components/nursery/DiscardChangesDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { ToastContainer } from "@/components/ui/toast";
 import { useHydrated } from "@/hooks/useHydrated";
 import { useToast } from "@/hooks/useToast";
@@ -119,8 +120,12 @@ export default function EditNamePage() {
 
       <main className="mx-auto max-w-lg px-4 py-6">
         <h1 className="mb-6 font-bold text-lg">園名を編集</h1>
+        <Label htmlFor="nursery-name" className="sr-only">
+          園名
+        </Label>
         <Input
           ref={inputRef}
+          id="nursery-name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="園名を入力"
