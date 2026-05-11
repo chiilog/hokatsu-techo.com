@@ -18,20 +18,17 @@ export function NurseryDetail({
   const formattedDate = formatVisitDate(nursery.visitDate);
 
   return (
-    <div className="space-y-6" data-testid="nursery-detail">
+    <div className="space-y-6">
       <div className="overflow-hidden rounded-xl border bg-card">
         <SlideLink
           href={`/nursery/${nursery.id}/edit/name`}
           direction="forward"
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
-          data-testid="edit-name-link"
           aria-label={`園名を編集: ${nursery.name}`}
         >
           <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground">園名</p>
-            <p className="truncate font-medium" data-testid="nursery-name">
-              {nursery.name}
-            </p>
+            <p className="truncate font-medium">{nursery.name}</p>
           </div>
           <ChevronRight
             className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
@@ -45,14 +42,11 @@ export function NurseryDetail({
           href={`/nursery/${nursery.id}/edit/visit-date`}
           direction="forward"
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
-          data-testid="edit-date-link"
           aria-label={`見学日を編集: ${formattedDate}`}
         >
           <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground">見学日</p>
-            <p className="truncate" data-testid="visit-date">
-              {formattedDate}
-            </p>
+            <p className="truncate">{formattedDate}</p>
           </div>
           <ChevronRight
             className="ml-2 h-5 w-5 shrink-0 text-muted-foreground"
@@ -66,7 +60,6 @@ export function NurseryDetail({
           href={`/nursery/${nursery.id}/edit/memo`}
           direction="forward"
           className="flex items-center justify-between px-4 py-3 active:bg-accent"
-          data-testid="edit-memo-link"
           aria-label={
             nursery.memo ? `メモを編集: ${nursery.memo}` : "メモを追加"
           }
@@ -74,17 +67,11 @@ export function NurseryDetail({
           <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground">メモ</p>
             {nursery.memo ? (
-              <p
-                className="whitespace-pre-wrap break-words text-sm"
-                data-testid="memo-display"
-              >
+              <p className="whitespace-pre-wrap break-words text-sm">
                 {nursery.memo}
               </p>
             ) : (
-              <p
-                className="text-sm text-muted-foreground"
-                data-testid="memo-display"
-              >
+              <p className="text-sm text-muted-foreground">
                 気づいたことを自由に書けます
               </p>
             )}
@@ -97,12 +84,7 @@ export function NurseryDetail({
       </div>
 
       <div>
-        <Button
-          variant="link"
-          onClick={onVisitTipsClick}
-          className="px-0"
-          data-testid="visit-tips-link"
-        >
+        <Button variant="link" onClick={onVisitTipsClick} className="px-0">
           見学のコツを見る
         </Button>
       </div>

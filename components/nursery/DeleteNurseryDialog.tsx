@@ -26,7 +26,7 @@ export function DeleteNurseryDialog({
 }: DeleteNurseryDialogProps) {
   return (
     <AlertDialog open={open} onOpenChange={(isOpen) => !isOpen && onCancel()}>
-      <AlertDialogContent data-testid="delete-nursery-dialog">
+      <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>この園を削除しますか？</AlertDialogTitle>
           <AlertDialogDescription>
@@ -34,14 +34,8 @@ export function DeleteNurseryDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel data-testid="delete-cancel-button">
-            キャンセル
-          </AlertDialogCancel>
-          <AlertDialogAction
-            onClick={onConfirm}
-            variant="destructive"
-            data-testid="delete-confirm-button"
-          >
+          <AlertDialogCancel>キャンセル</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm} variant="destructive">
             削除
           </AlertDialogAction>
         </AlertDialogFooter>

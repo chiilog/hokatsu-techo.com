@@ -82,7 +82,6 @@ export default function EditVisitDatePage() {
             size="sm"
             onClick={() => navigateBack()}
             className="gap-1 px-2"
-            data-testid="back-button"
           >
             <ChevronLeft className="h-5 w-5" />
             戻る

@@ -40,7 +40,7 @@ describe("OnboardingDialog", () => {
     const onClose = vi.fn();
     render(<OnboardingDialog open={true} onClose={onClose} />);
 
-    await user.click(screen.getByTestId("onboarding-start-button"));
+    await user.click(screen.getByRole("button", { name: "はじめる" }));
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });

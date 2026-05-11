@@ -32,6 +32,8 @@ describe("NurseryList", () => {
   it("園が0件の場合、空状態メッセージが表示される", () => {
     render(<NurseryList nurseries={[]} />);
     expect(screen.getByText("まだ園が登録されていません")).toBeInTheDocument();
-    expect(screen.getByTestId("empty-state")).toBeInTheDocument();
+    expect(
+      screen.getByText("見学候補の園を追加しましょう"),
+    ).toBeInTheDocument();
   });
 });

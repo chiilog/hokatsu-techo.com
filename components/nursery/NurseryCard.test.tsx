@@ -43,13 +43,13 @@ describe("NurseryCard", () => {
 
   it("メモが空の場合プレビューが表示されない", () => {
     render(<NurseryCard nursery={mockNursery} />);
-    const card = screen.getByTestId("nursery-card-test-1");
-    expect(card.querySelectorAll("p")).toHaveLength(0);
+    const link = screen.getByRole("link", { name: "さくら保育園" });
+    expect(link.querySelectorAll("p")).toHaveLength(0);
   });
 
   it("園詳細へのリンクが設定されている", () => {
     render(<NurseryCard nursery={mockNursery} />);
-    const link = screen.getByTestId("nursery-card-test-1");
+    const link = screen.getByRole("link", { name: "さくら保育園" });
     expect(link).toHaveAttribute("href", "/nursery/test-1");
   });
 });

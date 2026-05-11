@@ -13,27 +13,30 @@ describe("NurseryForm", () => {
     render(<NurseryForm onAdd={vi.fn()} />);
     expect(screen.getByLabelText("園名")).toBeInTheDocument();
     expect(screen.getByText("見学日")).toBeInTheDocument();
-    expect(screen.getByTestId("add-nursery-button")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "追加する" }),
+    ).toBeInTheDocument();
   });
 
   it("園名が空の場合、追加ボタンが非活性", () => {
     render(<NurseryForm onAdd={vi.fn()} />);
-    expect(screen.getByTestId("add-nursery-button")).toBeDisabled();
+    expect(screen.getByRole("button", { name: "追加する" })).toBeDisabled();
   });
 
   it("「今日」と「あとで設定する」の選択肢がある", () => {
     render(<NurseryForm onAdd={vi.fn()} />);
-    expect(screen.getByTestId("visit-date-today")).toBeInTheDocument();
-    expect(screen.getByTestId("visit-date-later")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "今日" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "あとで設定する" }),
+    ).toBeInTheDocument();
   });
 
   it("デフォルトは「あとで設定する」が選択されている", () => {
     render(<NurseryForm onAdd={vi.fn()} />);
-    expect(screen.getByTestId("visit-date-later")).toHaveAttribute(
-      "aria-pressed",
-      "true",
-    );
-    expect(screen.getByTestId("visit-date-today")).toHaveAttribute(
+    expect(
+      screen.getByRole("button", { name: "あとで設定する" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "今日" })).toHaveAttribute(
       "aria-pressed",
       "false",
     );
@@ -44,8 +47,8 @@ describe("NurseryForm", () => {
     const onAdd = vi.fn();
     render(<NurseryForm onAdd={onAdd} />);
 
-    await user.type(screen.getByTestId("nursery-name-input"), "さくら保育園");
-    await user.click(screen.getByTestId("add-nursery-button"));
+    await user.type(screen.getByLabelText("園名"), "さくら保育園");
+    await user.click(screen.getByRole("button", { name: "追加する" }));
 
     expect(onAdd).toHaveBeenCalledWith("さくら保育園", null);
   });
@@ -55,14 +58,13 @@ describe("NurseryForm", () => {
     const onAdd = vi.fn();
     render(<NurseryForm onAdd={onAdd} />);
 
-    await user.type(screen.getByTestId("nursery-name-input"), "ひまわり保育園");
-    await user.click(screen.getByTestId("visit-date-today"));
-    await user.click(screen.getByTestId("add-nursery-button"));
+    await user.type(screen.getByLabelText("園名"), "ひまわり保育園");
+    await user.click(screen.getByRole("button", { name: "今日" }));
+    await user.click(screen.getByRole("button", { name: "追加する" }));
 
     expect(onAdd).toHaveBeenCalledTimes(1);
     const [calledName, calledDate] = onAdd.mock.calls[0];
     expect(calledName).toBe("ひまわり保育園");
-    // ISO date format check (YYYY-MM-DD)
     expect(calledDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 });

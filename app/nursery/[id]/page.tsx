@@ -86,7 +86,6 @@ export default function NurseryDetailPage() {
             variant="destructive"
             className="w-full"
             onClick={() => setShowDeleteDialog(true)}
-            data-testid="delete-nursery-button"
           >
             この園を削除する
           </Button>

@@ -101,17 +101,11 @@ export default function EditMemoPage() {
             size="sm"
             onClick={handleBack}
             className="gap-1 px-2"
-            data-testid="back-button"
           >
             <ChevronLeft className="h-5 w-5" />
             戻る
           </Button>
-          <Button
-            size="sm"
-            onClick={handleSave}
-            disabled={!hasChanges}
-            data-testid="save-button"
-          >
+          <Button size="sm" onClick={handleSave} disabled={!hasChanges}>
             完了
           </Button>
         </div>
@@ -126,7 +120,6 @@ export default function EditMemoPage() {
           placeholder="気づいたことを自由に書けます"
           rows={12}
           className="min-h-[50vh] resize-none"
-          data-testid="edit-memo-textarea"
         />
       </main>
 

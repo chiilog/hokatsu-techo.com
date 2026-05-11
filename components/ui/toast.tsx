@@ -30,7 +30,6 @@ function ToastItem({ toast, onRemove }: ToastProps) {
           ? "bg-foreground/90 text-background"
           : "bg-destructive text-white",
       )}
-      data-testid="toast-message"
     >
       {toast.type === "success" ? (
         <Check className="h-4 w-4" aria-hidden="true" />
@@ -53,7 +52,6 @@ export function ToastContainer({ toasts, onRemove }: ToastContainerProps) {
       className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-2"
       role="status"
       aria-live="polite"
-      data-testid="toast-container"
     >
       {toasts.map((toast) => (
         <ToastItem key={toast.id} toast={toast} onRemove={onRemove} />

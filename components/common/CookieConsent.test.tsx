@@ -23,7 +23,9 @@ describe("CookieConsent", () => {
 
   it("同意未決定のときバナーが表示される", () => {
     render(<CookieConsent />);
-    expect(screen.getByTestId("cookie-consent-banner")).toBeInTheDocument();
+    expect(
+      screen.getByRole("dialog", { name: "Cookie使用の同意" }),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Cookieを使用しています/)).toBeInTheDocument();
   });
 
@@ -31,9 +33,9 @@ describe("CookieConsent", () => {
     const user = userEvent.setup();
     render(<CookieConsent />);
 
-    await user.click(screen.getByTestId("cookie-accept-button"));
+    await user.click(screen.getByRole("button", { name: "同意する" }));
     expect(
-      screen.queryByTestId("cookie-consent-banner"),
+      screen.queryByRole("dialog", { name: "Cookie使用の同意" }),
     ).not.toBeInTheDocument();
     expect(localStorage.getItem(STORAGE_KEYS.cookieConsent)).toBe("accepted");
   });
@@ -42,9 +44,9 @@ describe("CookieConsent", () => {
     const user = userEvent.setup();
     render(<CookieConsent />);
 
-    await user.click(screen.getByTestId("cookie-decline-button"));
+    await user.click(screen.getByRole("button", { name: "同意しない" }));
     expect(
-      screen.queryByTestId("cookie-consent-banner"),
+      screen.queryByRole("dialog", { name: "Cookie使用の同意" }),
     ).not.toBeInTheDocument();
     expect(localStorage.getItem(STORAGE_KEYS.cookieConsent)).toBe("declined");
   });
@@ -53,7 +55,7 @@ describe("CookieConsent", () => {
     localStorage.setItem(STORAGE_KEYS.cookieConsent, "accepted");
     render(<CookieConsent />);
     expect(
-      screen.queryByTestId("cookie-consent-banner"),
+      screen.queryByRole("dialog", { name: "Cookie使用の同意" }),
     ).not.toBeInTheDocument();
   });
 });

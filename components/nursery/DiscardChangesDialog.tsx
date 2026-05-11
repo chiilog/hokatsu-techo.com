@@ -24,7 +24,7 @@ export function DiscardChangesDialog({
 }: DiscardChangesDialogProps) {
   return (
     <AlertDialog open={open}>
-      <AlertDialogContent size="sm" data-testid="discard-changes-dialog">
+      <AlertDialogContent size="sm">
         <AlertDialogHeader>
           <AlertDialogTitle>変更を破棄しますか？</AlertDialogTitle>
           <AlertDialogDescription>
@@ -32,17 +32,8 @@ export function DiscardChangesDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel
-            onClick={onCancel}
-            data-testid="discard-cancel-button"
-          >
-            編集を続ける
-          </AlertDialogCancel>
-          <AlertDialogAction
-            variant="destructive"
-            onClick={onDiscard}
-            data-testid="discard-confirm-button"
-          >
+          <AlertDialogCancel onClick={onCancel}>編集を続ける</AlertDialogCancel>
+          <AlertDialogAction variant="destructive" onClick={onDiscard}>
             破棄
           </AlertDialogAction>
         </AlertDialogFooter>

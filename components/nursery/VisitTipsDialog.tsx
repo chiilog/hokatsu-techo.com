@@ -36,7 +36,7 @@ const VISIT_TIPS = [
 export function VisitTipsDialog({ open, onClose }: VisitTipsDialogProps) {
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent data-testid="visit-tips-dialog">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>見学のコツ</DialogTitle>
           <DialogDescription>
@@ -59,7 +59,7 @@ export function VisitTipsDialog({ open, onClose }: VisitTipsDialogProps) {
           <Button
             onClick={onClose}
             className="w-full"
-            data-testid="visit-tips-close-button"
+            aria-label="見学のコツを閉じる"
           >
             閉じる
           </Button>

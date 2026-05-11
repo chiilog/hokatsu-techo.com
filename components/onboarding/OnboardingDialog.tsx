@@ -18,7 +18,7 @@ interface OnboardingDialogProps {
 export function OnboardingDialog({ open, onClose }: OnboardingDialogProps) {
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent showCloseButton={false} data-testid="onboarding-dialog">
+      <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>保活手帳へようこそ</DialogTitle>
           <DialogDescription>
@@ -46,11 +46,7 @@ export function OnboardingDialog({ open, onClose }: OnboardingDialogProps) {
         </div>
 
         <DialogFooter>
-          <Button
-            onClick={onClose}
-            className="w-full"
-            data-testid="onboarding-start-button"
-          >
+          <Button onClick={onClose} className="w-full">
             はじめる
           </Button>
         </DialogFooter>

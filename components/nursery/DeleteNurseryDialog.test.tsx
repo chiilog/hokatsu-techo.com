@@ -33,7 +33,7 @@ describe("DeleteNurseryDialog", () => {
       />,
     );
 
-    await user.click(screen.getByTestId("delete-confirm-button"));
+    await user.click(screen.getByRole("button", { name: "削除" }));
     expect(onConfirm).toHaveBeenCalledTimes(1);
   });
 
@@ -49,7 +49,7 @@ describe("DeleteNurseryDialog", () => {
       />,
     );
 
-    await user.click(screen.getByTestId("delete-cancel-button"));
+    await user.click(screen.getByRole("button", { name: "キャンセル" }));
     expect(onCancel).toHaveBeenCalledTimes(1);
   });
 
