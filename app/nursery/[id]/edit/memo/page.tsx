@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { DiscardChangesDialog } from "@/components/nursery/DiscardChangesDialog";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ToastContainer } from "@/components/ui/toast";
 import { useHydrated } from "@/hooks/useHydrated";
@@ -113,8 +114,12 @@ export default function EditMemoPage() {
 
       <main className="mx-auto max-w-lg px-4 py-6">
         <h1 className="mb-6 font-bold text-lg">メモを編集</h1>
+        <Label htmlFor="nursery-memo" className="sr-only">
+          メモ
+        </Label>
         <Textarea
           ref={textareaRef}
+          id="nursery-memo"
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="気づいたことを自由に書けます"
