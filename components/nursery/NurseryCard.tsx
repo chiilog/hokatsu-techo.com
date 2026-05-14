@@ -13,7 +13,6 @@ export function NurseryCard({ nursery }: NurseryCardProps) {
     <SlideLink
       href={`/nursery/${nursery.id}`}
       direction="forward"
-      aria-label={nursery.name}
       className="block rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50"
     >
       <div className="flex items-start justify-between gap-2">
