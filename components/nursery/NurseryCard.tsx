@@ -1,0 +1,31 @@
+import { SlideLink } from "@/components/common/SlideLink";
+import { formatVisitDate } from "@/lib/formatDate";
+import type { Nursery } from "@/types/nursery";
+
+interface NurseryCardProps {
+  nursery: Nursery;
+}
+
+export function NurseryCard({ nursery }: NurseryCardProps) {
+  const formattedDate = formatVisitDate(nursery.visitDate);
+
+  return (
+    <SlideLink
+      href={`/nursery/${nursery.id}`}
+      direction="forward"
+      className="block rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <h2 className="font-medium text-base">{nursery.name}</h2>
+        <span className="shrink-0 text-muted-foreground text-sm">
+          {formattedDate}
+        </span>
+      </div>
+      {nursery.memo && (
+        <p className="mt-2 line-clamp-2 text-muted-foreground text-sm">
+          {nursery.memo}
+        </p>
+      )}
+    </SlideLink>
+  );
+}
