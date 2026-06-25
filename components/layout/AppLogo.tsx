@@ -11,7 +11,7 @@ export function AppLogo({ className }: { className?: string }) {
       strokeLinejoin="round"
       aria-hidden="true"
       className={cn(
-        "size-5 fill-[var(--logo-fill)] stroke-[var(--logo-stroke)]",
+        "size-5 fill-(--logo-fill) stroke-(--logo-stroke)",
         className,
       )}
     >

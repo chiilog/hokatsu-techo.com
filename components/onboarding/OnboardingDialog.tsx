@@ -29,7 +29,13 @@ export function OnboardingDialog({ open, onClose }: OnboardingDialogProps) {
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent
         showCloseButton={false}
-        onOpenAutoFocus={(e) => e.preventDefault()}
+        onOpenAutoFocus={(event) => {
+          // 「はじめる」ボタンへの自動フォーカス（初回表示時のリング）は避けつつ、
+          // a11y のためフォーカスはダイアログ本体へ移す（SR がタイトルを読み上げ、
+          // フォーカストラップも維持される）。
+          event.preventDefault();
+          (event.currentTarget as HTMLElement | null)?.focus();
+        }}
       >
         <DialogHeader>
           <DialogTitle>保活手帳へようこそ</DialogTitle>
