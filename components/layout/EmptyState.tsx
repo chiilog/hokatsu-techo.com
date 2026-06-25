@@ -1,5 +1,6 @@
-import { Plus } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import Link from "next/link";
+import { IconCircle } from "@/components/layout/IconCircle";
 import { Button } from "@/components/ui/button";
 
 interface EmptyStateProps {
@@ -15,12 +16,15 @@ export function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-      <p className="font-medium text-lg text-muted-foreground">{message}</p>
+      <IconCircle className="mb-4 size-14 bg-secondary">
+        <Heart className="size-7 text-primary" aria-hidden="true" />
+      </IconCircle>
+      <p className="font-bold text-lg text-muted-foreground">{message}</p>
       {description && (
         <p className="mt-2 text-muted-foreground text-sm">{description}</p>
       )}
       {showAddButton && (
-        <Button asChild size="sm" className="mt-4">
+        <Button asChild className="mt-4">
           <Link href="/add">
             <Plus className="mr-1 h-4 w-4" />
             園を追加する

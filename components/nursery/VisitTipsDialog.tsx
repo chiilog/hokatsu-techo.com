@@ -1,5 +1,6 @@
 "use client";
 
+import { IconCircle } from "@/components/layout/IconCircle";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -44,13 +45,21 @@ export function VisitTipsDialog({ open, onClose }: VisitTipsDialogProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 py-2">
+        <div className="space-y-3.5 py-2">
           {VISIT_TIPS.map((tip, index) => (
-            <div key={tip.title} className="space-y-1">
-              <h3 className="font-medium text-sm">
-                {index + 1}. {tip.title}
-              </h3>
-              <p className="text-muted-foreground text-sm">{tip.description}</p>
+            <div key={tip.title} className="flex gap-3">
+              <IconCircle
+                className="size-6 font-bold text-primary text-xs"
+                aria-hidden="true"
+              >
+                {index + 1}
+              </IconCircle>
+              <div className="space-y-1">
+                <h3 className="font-bold text-sm">{tip.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {tip.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>

@@ -1,10 +1,8 @@
 "use client";
 
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { SlideLink } from "@/components/common/SlideLink";
+import { BackHeader } from "@/components/layout/BackHeader";
 import { DeleteNurseryDialog } from "@/components/nursery/DeleteNurseryDialog";
 import { NurseryDetail } from "@/components/nursery/NurseryDetail";
 import { VisitTipsDialog } from "@/components/nursery/VisitTipsDialog";
@@ -41,17 +39,7 @@ export default function NurseryDetailPage() {
   if (!nursery) {
     return (
       <>
-        <header className="sticky top-0 z-10 border-b bg-background">
-          <div className="flex items-center gap-2 px-4 py-3">
-            <Button variant="ghost" size="sm" asChild className="gap-1 px-2">
-              <Link href="/" aria-label="戻る">
-                <ChevronLeft className="h-5 w-5" />
-                戻る
-              </Link>
-            </Button>
-            <h1 className="font-bold text-lg">園が見つかりません</h1>
-          </div>
-        </header>
+        <BackHeader backHref="/" title="園が見つかりません" />
         <main className="mx-auto max-w-lg px-4 py-6">
           <p className="text-muted-foreground">
             この園は削除されたか、存在しません。
@@ -63,17 +51,7 @@ export default function NurseryDetailPage() {
 
   return (
     <>
-      <header className="sticky top-0 z-10 border-b bg-background">
-        <div className="flex items-center gap-2 px-4 py-3">
-          <Button variant="ghost" size="sm" asChild className="gap-1 px-2">
-            <SlideLink href="/" direction="back" aria-label="戻る">
-              <ChevronLeft className="h-5 w-5" />
-              戻る
-            </SlideLink>
-          </Button>
-          <h1 className="font-bold text-lg">園の詳細</h1>
-        </div>
-      </header>
+      <BackHeader backHref="/" title="園の詳細" />
 
       <main className="mx-auto max-w-lg px-4 py-6">
         <NurseryDetail
@@ -83,7 +61,7 @@ export default function NurseryDetailPage() {
 
         <div className="mt-12 border-t pt-6">
           <Button
-            variant="destructive"
+            variant="destructive-outline"
             className="w-full"
             onClick={() => setShowDeleteDialog(true)}
           >
