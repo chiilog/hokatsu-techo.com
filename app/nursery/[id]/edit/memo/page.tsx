@@ -1,8 +1,8 @@
 "use client";
 
-import { ChevronLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { BackHeader } from "@/components/layout/BackHeader";
 import { DiscardChangesDialog } from "@/components/nursery/DiscardChangesDialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -73,19 +73,7 @@ export default function EditMemoPage() {
   if (!nursery) {
     return (
       <>
-        <header className="sticky top-0 z-10 border-b bg-background">
-          <div className="flex items-center gap-2 px-4 py-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigateBack()}
-              className="gap-1 px-2"
-            >
-              <ChevronLeft className="h-5 w-5" />
-              戻る
-            </Button>
-          </div>
-        </header>
+        <BackHeader onBack={() => navigateBack()} />
         <main className="mx-auto max-w-lg px-4 py-6">
           <p className="text-muted-foreground">園が見つかりません。</p>
         </main>
@@ -95,22 +83,14 @@ export default function EditMemoPage() {
 
   return (
     <>
-      <header className="sticky top-0 z-10 border-b bg-background">
-        <div className="flex items-center justify-between px-4 py-3">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleBack}
-            className="gap-1 px-2"
-          >
-            <ChevronLeft className="h-5 w-5" />
-            戻る
-          </Button>
+      <BackHeader
+        onBack={handleBack}
+        actions={
           <Button size="sm" onClick={handleSave} disabled={!hasChanges}>
             完了
           </Button>
-        </div>
-      </header>
+        }
+      />
 
       <main className="mx-auto max-w-lg px-4 py-6">
         <h1 className="mb-6 font-bold text-lg">メモを編集</h1>

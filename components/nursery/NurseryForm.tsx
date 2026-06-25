@@ -49,10 +49,10 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
             onClick={() => setVisitDateOption("today")}
             aria-pressed={visitDateOption === "today"}
             className={cn(
-              "rounded-xl border-2 px-4 py-3 text-center text-sm font-medium transition-colors",
+              "rounded-lg border-2 px-4 py-3 text-center text-sm transition-colors",
               visitDateOption === "today"
-                ? "border-primary bg-primary/5 text-primary"
-                : "border-border text-muted-foreground hover:border-primary/50",
+                ? "border-primary bg-accent font-bold text-primary"
+                : "border-border bg-card font-medium text-muted-foreground hover:border-primary/50",
             )}
           >
             今日
@@ -62,10 +62,10 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
             onClick={() => setVisitDateOption("later")}
             aria-pressed={visitDateOption === "later"}
             className={cn(
-              "rounded-xl border-2 px-4 py-3 text-center text-sm font-medium transition-colors",
+              "rounded-lg border-2 px-4 py-3 text-center text-sm transition-colors",
               visitDateOption === "later"
-                ? "border-primary bg-primary/5 text-primary"
-                : "border-border text-muted-foreground hover:border-primary/50",
+                ? "border-primary bg-accent font-bold text-primary"
+                : "border-border bg-card font-medium text-muted-foreground hover:border-primary/50",
             )}
           >
             あとで設定する
@@ -73,7 +73,7 @@ export function NurseryForm({ onAdd }: NurseryFormProps) {
         </div>
       </div>
 
-      <Button type="submit" className="w-full" disabled={!isValid}>
+      <Button type="submit" size="lg" className="w-full" disabled={!isValid}>
         追加する
       </Button>
     </form>

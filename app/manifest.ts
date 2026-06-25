@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "保育園見学の記録を残すアプリ",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#0a0a0a",
+    background_color: "#FDF4EC",
+    theme_color: "#D06E50",
     orientation: "portrait",
     icons: [
       {

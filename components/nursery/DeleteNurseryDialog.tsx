@@ -33,7 +33,7 @@ export function DeleteNurseryDialog({
             「{nurseryName}」を削除します。この操作は取り消せません。
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className="grid grid-cols-2">
           <AlertDialogCancel>キャンセル</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm} variant="destructive">
             削除

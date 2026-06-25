@@ -20,51 +20,91 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* 角丸スケール（--radius=14px を基準に単調増加。案Bの 12/14/16/18/22 に対応） */
+  --radius-sm: calc(var(--radius) - 2px); /* 12px 入力内要素 */
+  --radius-md: var(--radius); /* 14px 既定 */
+  --radius-lg: calc(var(--radius) + 2px); /* 16px 入力/ボタン */
+  --radius-xl: calc(var(--radius) + 4px); /* 18px カード */
+  --radius-2xl: calc(var(--radius) + 8px); /* 22px ダイアログ */
+  --font-sans: var(--font-rounded), "M PLUS Rounded 1c", system-ui, sans-serif;
+  /* 暖色シャドウ: shadcn の shadow ユーティリティを暖色トークンへ差し替え（冷たいグレーの影を使わない） */
+  --shadow-2xs: var(--shadow-card);
+  --shadow-xs: var(--shadow-card);
+  --shadow-sm: var(--shadow-card);
+  --shadow: var(--shadow-card);
+  --shadow-md: var(--shadow-card);
+  --shadow-lg: var(--shadow-elevated);
+  --shadow-xl: var(--shadow-elevated);
+  --shadow-2xl: var(--shadow-elevated);
 }
 
+/* =====================================================================
+   保活手帳 — 案B「あたたかい」テーマ
+   ピーチ＆クリーム × 丸ゴシック / しっかり丸い角
+   ===================================================================== */
+
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /* 角丸を一段やわらかく（元は 0.625rem） */
+  --radius: 0.875rem;
+
+  --background: oklch(0.972 0.014 64.3);        /* #FDF4EC クリーム地 */
+  --foreground: oklch(0.412 0.034 52.5);        /* #5A463A 文字（ブラウン） */
+  --card: oklch(0.992 0.006 75.4);              /* #FFFCF8 カード */
+  --card-foreground: oklch(0.412 0.034 52.5);   /* #5A463A */
+  --primary: oklch(0.645 0.131 37.8);           /* #D06E50 ピーチ（主役） */
+  --primary-foreground: oklch(1 0 0);           /* #FFFFFF */
+  --secondary: oklch(0.933 0.028 58.8);         /* #F8E5D7 ソフトピーチ面 */
+  --secondary-foreground: oklch(0.412 0.034 52.5); /* #5A463A */
+  --muted: oklch(0.944 0.020 65.1);             /* #F6EADF */
+  --muted-foreground: oklch(0.661 0.046 56.4);  /* #A98C78 補助文字 */
+  --accent: oklch(0.925 0.037 52.7);            /* #FBE0D0 チップ背景 */
+  --accent-foreground: oklch(0.553 0.139 38.5); /* #B4502F */
+  --destructive: oklch(0.577 0.190 25.0);       /* 暖色寄りの赤 */
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.911 0.028 62.3);            /* #F0DECF */
+  --input: oklch(0.899 0.033 60.1);             /* #EFD9C8 */
+  --ring: oklch(0.645 0.131 37.8);              /* #D06E50 */
+
+  /* 暖色シャドウ（茶/ピーチを含ませ、階層を浮きの強さで表す） */
+  --shadow-card: 0 2px 8px rgba(199, 108, 74, 0.07);          /* カード/面 */
+  --shadow-button: 0 6px 14px rgba(208, 110, 80, 0.3);        /* 主役ボタン */
+  --shadow-button-destructive: 0 4px 10px rgba(192, 73, 46, 0.28); /* 削除ボタン */
+  --shadow-elevated: 0 8px 24px rgba(60, 45, 35, 0.12);       /* トースト/Cookie 等の中程度の浮き */
+  --shadow-floating: 0 18px 44px rgba(58, 34, 24, 0.3);       /* ダイアログ（最前面） */
+
+  /* ブランドロゴ（2色塗りのハート）の色。パレットには無い専用シェードのため独立トークン化 */
+  --logo-fill: #f3b996;
+  --logo-stroke: #d06e50;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --background: oklch(0.225 0.017 58.6);         /* #221A14 あたたかいダーク地 */
+  --foreground: oklch(0.929 0.025 57.7);         /* #F5E4D8 */
+  --card: oklch(0.269 0.025 53.0);               /* #30231B */
+  --card-foreground: oklch(0.929 0.025 57.7);    /* #F5E4D8 */
+  --primary: oklch(0.684 0.126 38.3);            /* #DB7C5E ダークでも映えるピーチ */
+  --primary-foreground: oklch(0.231 0.033 44.7); /* #2A1810 */
+  --secondary: oklch(0.301 0.030 53.3);          /* #3A2A20 */
+  --secondary-foreground: oklch(0.929 0.025 57.7); /* #F5E4D8 */
+  --muted: oklch(0.295 0.022 57.8);              /* #352A22 */
+  --muted-foreground: oklch(0.705 0.044 59.9);   /* #B59A85 */
+  --accent: oklch(0.330 0.048 44.8);             /* #4A2D20 チップ背景 */
+  --accent-foreground: oklch(0.752 0.119 41.4);  /* #EE9472 */
+  --destructive: oklch(0.505 0.165 26.0);
+  --destructive-foreground: oklch(0.929 0.025 57.7);
+  --border: oklch(0.325 0.031 54.2);             /* #413025 */
+  --input: oklch(0.325 0.031 54.2);              /* #413025 */
+  --ring: oklch(0.684 0.126 38.3);               /* #DB7C5E */
+
+  /* 暖色シャドウ（ダーク） */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-button: 0 6px 14px rgba(219, 124, 94, 0.3);
+  --shadow-button-destructive: 0 4px 10px rgba(217, 87, 60, 0.3);
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-floating: 0 18px 44px rgba(0, 0, 0, 0.5);
+
+  --logo-fill: #6b3b2a;
+  --logo-stroke: #ee9472;
 }
 
 @layer base {

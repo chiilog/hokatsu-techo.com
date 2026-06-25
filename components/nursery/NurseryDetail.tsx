@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
+import { BookOpenText, ChevronRight } from "lucide-react";
 import { SlideLink } from "@/components/common/SlideLink";
 import { Button } from "@/components/ui/button";
 import { formatVisitDate } from "@/lib/formatDate";
@@ -84,7 +84,12 @@ export function NurseryDetail({
       </div>
 
       <div>
-        <Button variant="link" onClick={onVisitTipsClick} className="px-0">
+        <Button
+          variant="link"
+          onClick={onVisitTipsClick}
+          className="px-0 font-bold no-underline hover:no-underline"
+        >
+          <BookOpenText className="size-4" aria-hidden="true" />
           見学のコツを見る
         </Button>
       </div>
